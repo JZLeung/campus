@@ -1,0 +1,61 @@
+@import '../scss/reset';
+@import '../scss/common';
+
+.left,.right{float: left;}
+.left{width: 200px}
+.right{width: 800px;}
+nav#main-nav{
+	//float: left;
+	width: 100%;
+	a{
+		padding: 0 10px;
+		display: inline-block;
+		margin-left: 10px;
+		height: 40px;
+		line-height: 40px;
+		&:hover{
+			background-color: black;
+		}
+	}
+	li.parentNode{
+		text-align: center;
+		font-size: 15px;list-style: none;
+		line-height: 2em;
+		color: #fff;
+		background-color: purple;
+	}
+	ul{
+		background-color: red;
+		text-align: left;
+	}
+}
+.bookList{
+	li.listItem{
+		width: 174px;
+		padding: 10px;
+		margin: 0px;
+		//border: 1px solid black;
+		display: inline-block;
+		img{width: 100%;}
+		p.itemDesc{
+			color: #999;
+			line-height: 20px;
+			height: 20px;
+			font-size: 0.8em;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		p.itemTitle{
+			font-weight: bold;
+			line-height: 20px;
+			height: 40px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow:ellipsis;
+		}
+		p.itemPrice{
+			font-weight: bold;
+		}
+	}
+}

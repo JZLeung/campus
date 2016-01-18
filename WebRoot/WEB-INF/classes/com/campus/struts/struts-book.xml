@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="book" extends="struts-default" namespace="/book">
+    	<action name="index" class="com.campus.Actions.bookAction">
+    		<result name="ok">/jsp/book/bookInfo.jsp</result>
+    	</action>
+    	<action name="add" class="com.campus.Actions.bookAction" method="redirectToAdd">
+    		<result name="add">/jsp/book/addBook.jsp</result>
+    	</action>
+    	<action name="addBook" class="com.campus.Actions.bookAction" method="addBook">
+    		<result name="ok">index?bid=${book.BID}</result>
+    		<result name="error">/jsp/book/addBook.jsp</result>
+    	</action>
+    </package>
+</struts>

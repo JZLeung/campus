@@ -1,0 +1,43 @@
+@import '../scss/import';
+.bookInfo{border: 1px solid #bcbcbc;*{margin-bottom: 10px;}}
+.bookHead{
+	font-size: 1.2em;
+	margin-top: 15px;
+	&:after{
+		content: '';
+		display: block;
+		clear: both;
+		height: 0;
+		visibility: hidden;
+	}
+	.leftCover{
+		float: left;
+		width: 350px;
+		img{width: 100%;display: block;}
+	}
+	.rightDetail{
+		float: left;
+		margin-left: 40px;
+		width: 600px;
+	}
+	span.left{
+		padding-right: .5em;
+		border-right: 7px solid #9A9494;
+		margin-right: 1em;
+		text-align: right;
+		width: 4em;
+		display: inline-block;
+	}
+	.title{line-height: 1em;font-size: 2.5em;font-weight: bold;}
+	.saler{color:#999;font-size: 1.2rem;}
+	.price{line-height: 2em;font-weight: bold;color: red;font-size: 1.5em;}
+	.time{font-size: .9rem;color: #999}
+	.summary{color: #999;font-size: .9em;}
+}
+.bookDesc{
+	width: auto;
+	margin: 5px 15px;
+	border-top: 4px solid #bcbcbc;
+    padding-top: 10px;
+	p.topDesc{text-align: center;color: #bcbcbc}
+}

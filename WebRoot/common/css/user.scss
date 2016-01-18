@@ -1,0 +1,30 @@
+@import '../scss/reset';
+@import '../scss/common';
+
+.infoDetail{
+	width: 1000px;margin:0 auto;
+	.tabList{
+		font-size: 0;width: 100%;
+		a{
+			display: inline-block;
+			width: 25%;font-size: 16px;
+			background-color: #bcbcbc;
+			padding: 10px 0;
+			text-align: center;text-decoration: none;
+			&:hover{@extend .active};
+		}
+		.active{background-color: black;color: white}
+	}
+	.content{
+		padding: 20px;
+		table{width: 100%;text-align: center;border-collapse: separate;border-spacing: 5px 10px}
+		td,th{text-align: center;}
+		#addinfo{
+			margin-top: 10px;
+			thead{padding: 10px;border-bottom: 2px solid #e3e3e3;}
+			td{padding: 10px 5px;border-bottom: 1px solid #999;}
+		}
+	}
+}	
+
+

@@ -1,0 +1,78 @@
+header#main-header{
+	width: 100%;
+	background-color: #f5f1f1;
+	font-size: 13px;line-height: 1.5em;
+	color: black;
+	ul li{
+		padding: 2px 5px;
+		margin-right: 10px;
+		display: inline-block;
+	}
+	.right-part{
+		float: right;
+		margin-right: 100px;
+	}
+}
+.container{width: 1000px;margin: 0 auto;min-width: 900px}
+.campus-logo{width: 200px;float: left;}
+.logo-search{margin-top: 20px}
+section#search-box{
+    border: 1px solid black;
+    padding: 0;
+    text-align: left;
+    float: left;
+    width: 490px;
+    margin: 25px;
+    margin-left: 200px;
+    display: inline-block;
+    position: relative;
+	input{
+		width: 400px;
+		margin-left: 2px;
+		outline: none;
+		border: none;
+		vertical-align: middle;
+		height: 30px;
+	}
+	button.btn-search{
+	    height: 30px;
+	    width: 80px;
+	    background-color: black;
+	    color: #fff;
+	    border: none;
+	    position: absolute;
+	    right: 0;
+	}
+}
+span.red{color: red !important;}
+/**	
+ * 	buttons style
+ */
+.btn{
+	border: 1px solid #7a7a7a;
+	background: transparent;
+	color: black;
+	padding: 5px 25px;
+	cursor: pointer;
+}
+.btn-confirm{
+	background-color: #0DBD08;
+	color: #fff;border: none;
+}
+.btn-cancel{
+	background-color: #E81E13;
+	color: #fff;border: none;
+}
+.btn-small{
+	padding: 2px;font-size: 13px;
+}
+.btn-collect {
+    border: none;
+    background-color: #FF7905;
+    color: #fff;
+}
+.btn-buy {
+    border: none;
+    color: #fff;
+    background-color: #F31A1A;
+}
