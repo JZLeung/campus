@@ -8,9 +8,15 @@
     		<result name="ok">/jsp/user/index.jsp</result>
     		<result name="login">/jsp/user/login.jsp</result>
     	</action>
+    	<action name="myCollections" class="com.campus.Actions.userAction" method="getMyCollections">
+    		<result name="ok">/jsp/user/collect.jsp</result>
+    	</action>
+    	<action name="myBooks" class="com.campus.Actions.userAction" method="getMyBooks">
+    		<result name="ok">/jsp/user/books.jsp</result>
+    	</action>
     	<action name="Login" class="com.campus.Actions.userAction" method="login">
     	</action>
-    	<action name="Rogin" class="com.campus.Actions.userAction" method="regist">
+    	<action name="Regist" class="com.campus.Actions.userAction" method="regist">
     	</action>
     	<action name="Logout" class="com.campus.Actions.userAction" method="logout">
     	</action>

@@ -26,7 +26,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="tabList">
 		<a href="javascript:void(0)" class="active">个人信息</a>
 		<a href="javascript:void(0)">我的订单</a>
-		<a href="javascript:void(0)">我的收藏</a>
+		<a href="user/myCollections">我的收藏</a>
+		<a href="user/myBooks">我发布的商品</a>
 		<a href="javascript:void(0)">我的评价</a>
 	</div>
 	

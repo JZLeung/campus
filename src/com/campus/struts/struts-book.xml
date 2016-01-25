@@ -6,12 +6,14 @@
     <package name="book" extends="struts-default" namespace="/book">
     	<action name="index" class="com.campus.Actions.bookAction">
     		<result name="ok">/jsp/book/bookInfo.jsp</result>
+    		<result name="error">/jsp/book/error.jsp</result>
     	</action>
     	<action name="add" class="com.campus.Actions.bookAction" method="redirectToAdd">
     		<result name="add">/jsp/book/addBook.jsp</result>
+    		<result name="error">/jsp/user/login.jsp</result>
     	</action>
     	<action name="addBook" class="com.campus.Actions.bookAction" method="addBook">
-    		<result name="ok">index?bid=${book.BID}</result>
+    		<result name="ok" type="redirect">index?bid=${bid}</result>
     		<result name="error">/jsp/book/addBook.jsp</result>
     	</action>
     </package>

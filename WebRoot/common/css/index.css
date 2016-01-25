@@ -130,6 +130,10 @@ section#search-box button.btn-search {
   right: 0;
 }
 
+span.red {
+  color: red !important;
+}
+
 /**	
  * 	buttons style
  */

@@ -93,12 +93,13 @@ common/css/popup.css">
       dataType:'text',
       data: {'addUser.username': name,'addUser.password': pass,'addUser.email':email},
       success: function(data){
-        console.log(data);
-        if(data == 1){
+        data = $.parseJSON(data);
+        console.log(data.msg);
+        if(data.code == 1){
           alert("注册成功");
           location.reload();
         }else{
-          alert(data);
+          alert(data.msg);
         }
       }
     });  

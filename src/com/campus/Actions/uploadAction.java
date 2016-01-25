@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-
 import com.campus.utils.commonUtil;
 
 public class uploadAction {
@@ -14,9 +13,7 @@ public class uploadAction {
 	private String myFileFileName;
 	private String destPath;
 	
-	public void execute()
-	{
-		/* Copy file to a safe location */
+	public void execute(){
 		destPath  = ServletActionContext.getServletContext().getRealPath("/")+"/upload/";
 		try{
 			String ext = myFileFileName.substring(myFileFileName.indexOf("."));
@@ -26,8 +23,10 @@ public class uploadAction {
 			String tmpString = time+ext;
 			File destFile  = new File(getDestPath()+tmpString);
 			FileUtils.copyFile(myFile, destFile);
+			//System.out.println("upload,"+time+","+ext.substring(1));
+			//String jsonString = new JSONObject(new String[]{"upload",time+"",ext.substring(1)}).toString();
 			commonUtil.getPrintWriter().print("upload/"+tmpString);
-			System.out.println("成功保存图片：upload/"+tmpString);
+			System.out.println("upload/"+tmpString);
 		}catch(IOException e){
 			e.printStackTrace();
 		}

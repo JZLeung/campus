@@ -19,20 +19,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/index.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/popup.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/jquery.carousel.css">
+    <style>
+    textarea{resize: none}
+	.red{color: red;}
+	.img{width: 200px;float: left;}
+	.img img{width: 100%;}
+	.table{float: left;border-collapse: separate;border-spacing: 5px;width: 600px}
+	table.table td:nth-child(1){width: 8em;}
+	.fileupload {
+		position: relative;
+		display: inline-block;
+		border-radius: 0;
+		padding: 4px 12px;
+		font-size: 16px;
+		overflow: hidden;
+		color: #000;
+		text-decoration: none;
+		text-indent: 0;
+	}
+	.fileupload input[type=file] {
+	    position: absolute;
+	    font-size: 160px;
+	    right: 0;
+	    top: 0;
+	    opacity: 0;
+	}
+    </style>
 </head>
 
 <body>
 	<jsp:include page="../index/header.jsp" ></jsp:include>
 	<h2>我要卖书</h2>
-	<p>请填写书本的详细信息。带<span class="red">*</span>为必填项</p>
+	
+	<div class="img">
+		<img src="<%=basePath%>common/img/bookCover/default.png" alt="">
+	</div>
 	<form action="book/addBook" method="post" enctype="multipart/form-data">
-	<table>
+	<table class="table">
+		<thead>
+			<th><p>请填写书本的详细信息。带<span class="red">*</span>为必填项</p></th>
+		</thead>
 		<tr>
-			<td>书名</td>
+			<td><span class="red">*</span>书名</td>
 			<td><input type="text" name="book.name" ></td>
 		</tr>
 		<tr>
-			<td>类别</td>
+			<td><span class="red">*</span>类别</td>
 			<td>
 				<select name="" id="parent" onchange="setChildNodes(this)"></select>
 				<select name="book.CID" id="child">
@@ -41,22 +73,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</td>
 		</tr>
 		<tr>
-			<td>价格</td>
+			<td><span class="red">*</span>价格</td>
 			<td><input type="text" name="book.price" ></td>
 		</tr>
 		<tr>
-			<td>简介</td>
+			<td>&nbsp;&nbsp;简介</td>
 			<td><input type="text" name="book.summary" ></td>
 		</tr>
 		<tr>
-			<td>描述</td>
-			<td><input type="text" name="book.detail" ></td>
+			<td>&nbsp;&nbsp;描述</td>
+			<td>
+				<textarea name="book.detail" id="" cols="30" rows="5"></textarea>
+			</td>
 		</tr>
 		<tr>
-			<td>上传封面图片</td>
+			<td>&nbsp;&nbsp;上传封面图片</td>
 			<form action="book/addBook" method="post" enctype="multipart/form-data" id="uploadForm">
 			<td>
-				<input type="file" name="myFile" id="upload">
+				<a href="javascript:void(0)" class="fileupload btn">
+					<span class="upload-holdplace">选择文件</span>
+					<input type="file" id="uploadfile" name="myFile">
+				</a>
+				<!-- <input type="file" name="myFile" id="upload"> -->
 				<input type="hidden" name="book.cover">
 			</td>
 			</form>
@@ -69,7 +107,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="<%=basePath%>common/js/ajaxfileupload.js"></script>
 	<script>
 	var catalog = JSON.parse('${catalogs}'),
-		childNode = [];
+		childNode = [],
+		$img = $('.img img');
 	var parent = document.getElementById('parent'),
 		child = document.getElementById('child');
 	function setChildNodes(obj){
@@ -81,21 +120,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function upload(obj){
 		$.ajaxFileUpload({
-			'type':'post',
-			dataType:'text',
-			'url':'upload/index',
-			fileElementId : 'upload',
+			type:'post',
+			secureuri:false,
+			url:'upload/index',
+			fileElementId : 'uploadfile',
+			dataType:'JSON',
 			success:function(data){
 				console.log(data);
+				
 				$("input[name='book.cover']").val(data);
-				$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
+				//$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
 			}
 		});
 	}
-	$('#upload').on('change', function(event) {
+	$('.fileupload').on('change','input[type=file]',function(event) {
+		$.ajaxFileUpload({
+			type:'post',
+			secureuri:false,
+			url:'upload/index',
+			fileElementId : 'uploadfile',
+			success:function(data){
+				console.log(data);
+				var url = $(data).find('body').text();
+				$img.attr('src', '<%=basePath%>'+url);
+				$("input[name='book.cover']").val(url);
+				//$('#upload').replaceWith('<input type="file" name="myFile" id="upload">'); 
+			}
+		});
+	});
+	/*$('#upload').on('change', function(event) {
 		event.preventDefault();
 		upload();
-	});
+	});*/
 	for (var i = 0; i < catalog.length; i++) {
 		var tmpdata = catalog[i] , 
 			tmpArray = [];

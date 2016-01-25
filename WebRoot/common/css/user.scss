@@ -7,7 +7,7 @@
 		font-size: 0;width: 100%;
 		a{
 			display: inline-block;
-			width: 25%;font-size: 16px;
+			width: 20%;font-size: 16px;
 			background-color: #bcbcbc;
 			padding: 10px 0;
 			text-align: center;text-decoration: none;
@@ -26,5 +26,17 @@
 		}
 	}
 }	
-
-
+.orders{
+	.order{
+		position: relative;
+		border: 1px solid #e2e2e2;
+		.statue{position: absolute;top: 0;right: 0;color: red;}
+		.left{float: left;width: 250px;
+			img{display: block;width: 100%;}
+		}
+		.right{float: left;width: 600px;margin-left: 20px;
+			.title{}
+		}
+	}
+	
+}

@@ -19,6 +19,7 @@ public class userDAO {
 	
 	public static User login(User loginUser) {
 		User user = findUserByName(loginUser.getUsername());
+		if (user == null) {return null;}
 		return user.getPassword().equals(loginUser.getPassword()) ? user : null;
 	}
 	

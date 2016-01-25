@@ -29,6 +29,7 @@
         <mapper resource="com/campus/Mapper/bookMapper.xml"/>
         <mapper resource="com/campus/Mapper/addressMapper.xml"/>
         <mapper resource="com/campus/Mapper/collectMapper.xml"/>
+        <mapper resource="com/campus/Mapper/orderMapper.xml"/>
     </mappers>
 
 </configuration>

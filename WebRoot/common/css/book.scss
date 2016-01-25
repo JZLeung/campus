@@ -41,3 +41,40 @@
     padding-top: 10px;
 	p.topDesc{text-align: center;color: #bcbcbc}
 }
+.bookHead2{
+	margin-top: 15px;
+	&:after{
+		content: '';
+		display: block;
+		clear: both;
+		height: 0;
+		visibility: hidden;
+	}
+	.leftCover{
+		float: left;
+		width: 200px;
+		img{width: 100%;display: block;}
+	}
+	.rightDetail{
+		float: left;
+		margin-left: 40px;
+		width: 600px;
+	}
+	span.left{
+		padding-right: .5em;
+		border-right: 3px solid #9A9494;
+		margin-right: 1em;
+		font-size: 0.9em;
+		text-align: right;
+		width: 4em;
+		display: inline-block;
+	}
+	.title{line-height: 1em;font-size: 1em;font-weight: bold;}
+	.saler,.time{color:#999;font-size: 1em;}
+	.price{line-height: 2em;font-weight: bold;color: red;font-size: 0.8em;}
+	.summary{color: #666666;font-size: 0.8em;}
+}
+table.table{float: left;border-collapse: separate;border-spacing: 11px;border-left: 6px solid #626262;margin-top: 1em;}
+table.table tr td:nth-child(1){width: 10em;}
+table.saler{width: 300px;}
+table.buyer{width: 600px;}

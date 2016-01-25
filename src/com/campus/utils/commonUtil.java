@@ -50,6 +50,10 @@ public class commonUtil {
 		}
 	}
 	
+	public static void print(Object object) {
+		getPrintWriter().print(object);
+	}
+	
 	public static Map getAllParams() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Enumeration enu=request.getParameterNames();
@@ -61,7 +65,10 @@ public class commonUtil {
 		return map;
 		
 	}
-	
+	/**
+	 * 检测是否已经登录
+	 * @return 未登录返回false 登录返回true
+	 */
 	public static boolean isLogin() {
 		return !(getSession("user") == null);
 	}

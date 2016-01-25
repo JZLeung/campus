@@ -15,6 +15,9 @@
     <select id="getBookById" parameterType="int" resultType="Book">
         select * from cp_books where BID=#{BID}
     </select>
+    <select id="getBookByUId" parameterType="User" resultType="Book">
+        select * from cp_books where UID=#{UID}
+    </select>
     <select id="getAllBooks"  resultType="Book">
         select * from cp_books
     </select>
@@ -22,6 +25,9 @@
         select * from cp_books where CID = #{CID}
     </select>
     <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="BID">
+    	<selectKey resultType="int" keyProperty="BID">  
+		  SELECT LAST_INSERT_ID()  
+		  </selectKey> 
         insert into cp_books(UID,CID,name,publishtime,price,summary,cover,detail) 
         values(#{UID},#{CID},#{name},#{publishtime},#{price},#{summary},#{cover},#{detail})
     </insert>

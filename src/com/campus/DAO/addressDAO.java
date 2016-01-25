@@ -36,4 +36,8 @@ public class addressDAO {
 	public static int delAdd(Address address) {
 		return dbutils.delete(clazz, "deleteAddress", address);
 	}
+	
+	public static Address getAddByAID(int aid) {
+		return (Address) dbutils.getOne(clazz, "getAddressByAId", aid);
+	}
 }

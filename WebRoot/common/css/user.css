@@ -130,6 +130,10 @@ section#search-box button.btn-search {
   right: 0;
 }
 
+span.red {
+  color: red !important;
+}
+
 /**	
  * 	buttons style
  */
@@ -180,7 +184,7 @@ section#search-box button.btn-search {
 }
 .infoDetail .tabList a {
   display: inline-block;
-  width: 25%;
+  width: 20%;
   font-size: 16px;
   background-color: #bcbcbc;
   padding: 10px 0;
@@ -213,4 +217,28 @@ section#search-box button.btn-search {
 .infoDetail .content #addinfo td {
   padding: 10px 5px;
   border-bottom: 1px solid #999;
+}
+
+.orders .order {
+  position: relative;
+  border: 1px solid #e2e2e2;
+}
+.orders .order .statue {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+}
+.orders .order .left {
+  float: left;
+  width: 250px;
+}
+.orders .order .left img {
+  display: block;
+  width: 100%;
+}
+.orders .order .right {
+  float: left;
+  width: 600px;
+  margin-left: 20px;
 }

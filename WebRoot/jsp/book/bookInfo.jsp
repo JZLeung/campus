@@ -40,14 +40,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<p><span class="left">发布者</span><span class="saler">${publisher.username }</span></p>
 				<p><span class="left">价格</span><span class="price">¥${book.price }</span></p>
 				<p><span class="left">发布时间</span><span class="time">${book.publishtime}</span></p>
-				<a class="btn btn-collect" href="javascript:void(0)" data-action="collect">收藏</a>
+				
+				<a class="btn btn-remove" href="javascript:void(0)" data-action="remove" hidden>取消收藏</a>
+				
+				
+				<a class="btn btn-collect" href="javascript:void(0)" data-action="collect" hidden>收藏</a>
+				
 				<a class="btn btn-buy" href="javascript:void(0)" data-action="">购买</a>
+				
 			</div>
 		</div>
 		<div class="bookDesc">
 			<p class="topDesc">详细信息</p>
 			<div class="detail">
-				<s:if test="book.detail == 'null'">
+				<s:if test="book.detail == null || book.detail == ''">
 					${publisher.username} 这个家伙很懒，什么都没有留下
 				</s:if>
 				<s:else>
@@ -57,18 +63,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	<script>
-	var bid = ${book.BID};
+	var bid = ${book.BID} , flag = '${collected }';
 	$(document).ready(function() {
-		$('.btn-collect').on('click', function(event) {
+		var $collect = $('.btn-collect'),
+			$remove = $('.btn-remove'),
+			$buy = $('.btn-buy');
+		if (flag == 'true') {$remove.show();}
+		else{$collect.show();}
+		$collect.on('click', function(event) {
 			event.preventDefault();
 			$.post('collect/add', {bid: bid}, function(data, textStatus, xhr) {
 				/*optional stuff to do after success */
+				data2 = data;
 				if (data == "1") {
 					alert("收藏成功");
+					$collect.hide();
+					$remove.show();
 				}else if (data == "0") {
 					alert("已收藏");
+					$collect.hide();
+					$remove.show();
 				}else{
 					alert("请先登录再收藏");
+				}
+			});
+		});
+		
+		$remove.on('click', function(event) {
+			event.preventDefault();
+			$.post('collect/cancel', {bid: bid}, function(data, textStatus, xhr) {
+				/*optional stuff to do after success */
+				data2 = data;
+				if (data == "1") {
+					alert("取消收藏成功");
+					$remove.hide();
+					$collect.show();
+				}else if (data == "0") {
+					alert("你没有收藏该书本");
+					$remove.hide();
+					$collect.show();
+				}else{
+					alert("请先登录再收藏");
+				}
+			});
+		});
+
+		$buy.on('click', function(event) {
+			event.preventDefault();
+			$.get('buy/iscanbuy', function(data) {
+				//alert(data);
+				if (data == "-1") {
+					alert("请先登录再操作");
+				}else if(data == "0"){
+					alert("该书已出售");
+				}else{
+					location.href = "buy/tobuybook?bid="+bid;
 				}
 			});
 		});

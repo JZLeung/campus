@@ -7,8 +7,11 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.campus.Class.Address;
+import com.campus.Class.Book;
 import com.campus.Class.User;
 import com.campus.DAO.addressDAO;
+import com.campus.DAO.bookDAO;
+import com.campus.DAO.collectDAO;
 import com.campus.DAO.userDAO;
 import com.campus.utils.commonUtil;
 
@@ -19,11 +22,16 @@ public class userAction {
 	private User updateUser;
 	private String newPass;
 	private List<Address> addresses;
+	private List<Book> books;
+	
+	private String json_pulishers;
+	private String json_books;
+	
 	/**
 	 * 登录
 	 */
 	public void login() {
-		System.out.println(user);
+		//System.out.println(user);
 		User loginedUser = userDAO.login(user);
 		if (loginedUser != null) {
 			commonUtil.setSession("user", loginedUser);
@@ -49,8 +57,12 @@ public class userAction {
 			msgMap.put("msg", "内部错误，请在尝试一次");
 			msgMap.put("code", "-1");
 		}
+		commonUtil.setSession("user", userDAO.findUserByName(addUser.getUsername()));
+		commonUtil.print(new JSONObject(msgMap).toString());
 	}
-	
+	/**
+	 * 更新个人信息
+	 */
 	public void update() {
 		user = (User) commonUtil.getSession("user");
 		System.out.println(updateUser);
@@ -79,34 +91,76 @@ public class userAction {
 		JSONObject jsonObject = new JSONObject(msgMap);
 		System.out.println(jsonObject.toString());
 		commonUtil.getPrintWriter().println(jsonObject.toString());
-		/*if (status == 1) {
-			msgMap.put("msg", "注册成功");
-			msgMap.put("code", "1");
-		}else if (status == 0) {
-			msgMap.put("msg", "用户名已存在");
-			msgMap.put("code", "0");
-		}else{
-			msgMap.put("msg", "内部错误，请在尝试一次");
-			msgMap.put("code", "-1");
-		}*/
 	}
 	
+	public String myOrders() {
+		user = (User) commonUtil.getSession("user");
+		if (user == null) {
+			return "login";
+		}else{
+			addresses = addressDAO.getAddressByUser(user);
+		}
+		return "ok";
+	}
+	
+	/**
+	 * 退出登录
+	 */
 	public void logout() {
 		commonUtil.setSession("user", null);
 		commonUtil.getPrintWriter().print("1");
 	}
-	
+	/**
+	 * 进入个人中心
+	 * @return 已登录则进入个人中心，未登录则跳至错误页面
+	 */
 	public String execute() {
 		user = (User) commonUtil.getSession("user");
 		if (user == null) {
 			return "login";
 		}else{
 			addresses = addressDAO.getAddressByUser(user);
-			
 		}
 		return "ok";
 	}
+	/**
+	 * 获取所有的收藏
+	 * @return
+	 */
+	public String getMyCollections() {
+		books = collectDAO.getAllCollections();
+		System.out.println(books);
+		return "ok";
+	}
+	/**
+	 * 获取发布的所有商品
+	 * @return
+	 */
+	public String getMyBooks() {
+		books = bookDAO.getBooksByUID();
+		return "ok";
+	}
 	
+	
+	
+	public String getJson_pulishers() {
+		return json_pulishers;
+	}
+	public void setJson_pulishers(String json_pulishers) {
+		this.json_pulishers = json_pulishers;
+	}
+	public String getJson_books() {
+		return json_books;
+	}
+	public void setJson_books(String json_books) {
+		this.json_books = json_books;
+	}
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 	public String getNewPass() {
 		return newPass;
 	}

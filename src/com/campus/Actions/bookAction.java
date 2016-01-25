@@ -1,6 +1,5 @@
 package com.campus.Actions;
 
-import java.io.File;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,6 +9,7 @@ import com.campus.Class.Catalog;
 import com.campus.Class.User;
 import com.campus.DAO.bookDAO;
 import com.campus.DAO.catalogDAO;
+import com.campus.DAO.collectDAO;
 import com.campus.DAO.userDAO;
 import com.campus.utils.commonUtil;
 
@@ -19,12 +19,15 @@ public class bookAction {
 	private int bid;
 	private User user;
 	private String catalogs;
+	private boolean collected;
 	
 	public String addBook() {
 		System.out.println(book);
 		int st = bookDAO.addBook(book);
 		if (st > 0) {
 			System.out.println(st);
+			System.out.println(book);
+			bid = book.getBID();
 			return "ok";
 		}
 		return "error";
@@ -32,6 +35,9 @@ public class bookAction {
 	}
 	
 	public String redirectToAdd() {
+		if (!commonUtil.isLogin()) {
+			return "error";
+		}
 		List<List<Catalog>> object = catalogDAO.getAllCatalog();
 		catalogs = new JSONArray(object).toString();
 		//System.out.println(catalogs);
@@ -40,14 +46,26 @@ public class bookAction {
 	
 	
 	public String execute() {
+		System.out.println(bid);
 		book = bookDAO.getBookById(bid);
-		System.out.println(book.getUID());
+		if (book == null) {
+			return "error";
+		}
 		publisher = userDAO.findUserById(book.getUID());
-		System.out.println(publisher);
+		collected = collectDAO.isCollected(bid);
+		System.out.println(collected);
 		return "ok";
 	}
+
 	
-	
+	public boolean isCollected() {
+		return collected;
+	}
+
+	public void setCollected(boolean collected) {
+		this.collected = collected;
+	}
+
 	public String getCatalogs() {
 		return catalogs;
 	}

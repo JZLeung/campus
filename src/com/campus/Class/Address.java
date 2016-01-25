@@ -70,4 +70,8 @@ public class Address {
 	public String toString() {
 		return "AID:"+this.AID+",address:"+this.province+" "+this.city+" "+this.country+this.detail+",phone:"+this.phone+",postcode:"+this.postcode;
 	}
+	
+	public String toAddress() {
+		return this.province+" "+this.city+" "+this.country+","+this.detail;
+	}
 }
