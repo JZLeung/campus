@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<a class="btn btn-collect" href="javascript:void(0)" data-action="collect" hidden>收藏</a>
 				
-				<a class="btn btn-buy" href="javascript:void(0)" data-action="">购买</a>
+				<a class="btn btn-buy" href="javascript:void(0)" data-action="buy">购买</a>
 				
 			</div>
 		</div>
@@ -63,13 +63,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	<script>
-	var bid = ${book.BID} , flag = '${collected }';
+	var bid = ${book.BID} , flag = '${collected }' , issold = ${statue};
 	$(document).ready(function() {
+		if (issold == '1') {$('.btn-buy').addClass('btn-disabled').removeClass('btn-buy').text('已售出');}
 		var $collect = $('.btn-collect'),
 			$remove = $('.btn-remove'),
 			$buy = $('.btn-buy');
 		if (flag == 'true') {$remove.show();}
 		else{$collect.show();}
+		
 		$collect.on('click', function(event) {
 			event.preventDefault();
 			$.post('collect/add', {bid: bid}, function(data, textStatus, xhr) {
@@ -110,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		$buy.on('click', function(event) {
 			event.preventDefault();
-			$.get('buy/iscanbuy', function(data) {
+			$.get('buy/iscanbuy', {'bid':bid} ,function(data) {
 				//alert(data);
 				if (data == "-1") {
 					alert("请先登录再操作");

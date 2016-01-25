@@ -10,6 +10,7 @@ import com.campus.Class.User;
 import com.campus.DAO.bookDAO;
 import com.campus.DAO.catalogDAO;
 import com.campus.DAO.collectDAO;
+import com.campus.DAO.orderDAO;
 import com.campus.DAO.userDAO;
 import com.campus.utils.commonUtil;
 
@@ -20,6 +21,7 @@ public class bookAction {
 	private User user;
 	private String catalogs;
 	private boolean collected;
+	private int statue;
 	
 	public String addBook() {
 		System.out.println(book);
@@ -53,7 +55,8 @@ public class bookAction {
 		}
 		publisher = userDAO.findUserById(book.getUID());
 		collected = collectDAO.isCollected(bid);
-		System.out.println(collected);
+		statue = orderDAO.isInOrder(bid);
+		System.out.println(statue);
 		return "ok";
 	}
 
@@ -64,6 +67,14 @@ public class bookAction {
 
 	public void setCollected(boolean collected) {
 		this.collected = collected;
+	}
+	
+	public int getStatue() {
+		return statue;
+	}
+
+	public void setStatue(int statue) {
+		this.statue = statue;
 	}
 
 	public String getCatalogs() {

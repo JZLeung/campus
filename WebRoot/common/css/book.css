@@ -174,6 +174,11 @@ span.red {
   background-color: #F31A1A;
 }
 
+.btn-disabled {
+  background-color: #9E9D9D;
+  color: #E2E1E1;
+}
+
 .bookInfo {
   border: 1px solid #bcbcbc;
 }

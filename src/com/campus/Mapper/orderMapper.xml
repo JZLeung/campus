@@ -8,7 +8,7 @@
         select * from cp_orders where BID=#{BID}
     </select>
     <select id="getOrderByUId" parameterType="int" resultType="Order">
-        select * from cp_orders where UID=#{UID}
+        select * from cp_orders where UID1=#{UID}
     </select>
     <select id="getOrderByOID" parameterType="int" resultType="Order">
         select * from cp_orders where OID=#{OID}

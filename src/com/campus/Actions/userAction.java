@@ -4,14 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.campus.Class.Address;
 import com.campus.Class.Book;
+import com.campus.Class.Order;
 import com.campus.Class.User;
 import com.campus.DAO.addressDAO;
 import com.campus.DAO.bookDAO;
 import com.campus.DAO.collectDAO;
+import com.campus.DAO.orderDAO;
 import com.campus.DAO.userDAO;
 import com.campus.utils.commonUtil;
 
@@ -23,9 +26,11 @@ public class userAction {
 	private String newPass;
 	private List<Address> addresses;
 	private List<Book> books;
+	private List<Order> orders;
 	
 	private String json_pulishers;
 	private String json_books;
+	private String json_addresses;
 	
 	/**
 	 * 登录
@@ -97,9 +102,15 @@ public class userAction {
 		user = (User) commonUtil.getSession("user");
 		if (user == null) {
 			return "login";
-		}else{
-			addresses = addressDAO.getAddressByUser(user);
 		}
+		//addresses = addressDAO.getAddressByUser(user);
+		orders = orderDAO.getOrderByUID(user.getUID());
+		json_pulishers = new JSONArray(orderDAO.getUsersByOrders(orders)).toString();
+		json_books = new JSONArray(orderDAO.getBooksByOrders(orders)).toString();
+		//json_addresses = new JSONArray(addresses).toString();
+		//System.out.println(json_addresses);
+		System.out.println("json_pulishers:"+json_pulishers);
+		System.out.println("json_books:"+json_books);
 		return "ok";
 	}
 	
@@ -148,6 +159,19 @@ public class userAction {
 	}
 	public void setJson_pulishers(String json_pulishers) {
 		this.json_pulishers = json_pulishers;
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	public String getJson_addresses() {
+		return json_addresses;
+	}
+	public void setJson_addresses(String json_addresses) {
+		this.json_addresses = json_addresses;
 	}
 	public String getJson_books() {
 		return json_books;
