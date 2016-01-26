@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2016-01-26 22:54:52
+Date: 2016-01-26 23:47:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -191,7 +191,7 @@ CREATE TABLE `cp_orders` (
   `UID2` int(11) NOT NULL,
   `BID` int(11) NOT NULL,
   `starttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `endtime` timestamp NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `endtime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `amount` float NOT NULL,
   `statue` int(11) NOT NULL,
   `AID` int(11) NOT NULL,
@@ -205,14 +205,16 @@ CREATE TABLE `cp_orders` (
   CONSTRAINT `order_BID` FOREIGN KEY (`BID`) REFERENCES `cp_books` (`BID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_UID1` FOREIGN KEY (`UID1`) REFERENCES `cp_user` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_UID2` FOREIGN KEY (`UID2`) REFERENCES `cp_user` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cp_orders
 -- ----------------------------
-INSERT INTO `cp_orders` VALUES ('6', '7', '3', '15', '2016-01-26 00:15:34', '2016-01-26 00:15:34', '27.4', '0', '16', null, null, null);
-INSERT INTO `cp_orders` VALUES ('7', '2', '7', '39', '2016-01-26 00:15:36', '2016-01-26 00:15:36', '91', '2', '8', null, null, null);
-INSERT INTO `cp_orders` VALUES ('10', '2', '3', '8', '2016-01-25 23:34:30', null, '0', '0', '12', null, null, null);
+INSERT INTO `cp_orders` VALUES ('6', '7', '3', '15', '2016-01-26 23:40:18', null, '27.4', '0', '16', null, null, null);
+INSERT INTO `cp_orders` VALUES ('7', '2', '7', '39', '2016-01-26 23:40:18', null, '91', '2', '8', null, null, null);
+INSERT INTO `cp_orders` VALUES ('10', '2', '3', '8', '2016-01-26 23:40:18', null, '48.7', '0', '12', null, null, null);
+INSERT INTO `cp_orders` VALUES ('11', '2', '3', '1', '2016-01-26 23:40:19', null, '61.2', '0', '8', null, null, null);
+INSERT INTO `cp_orders` VALUES ('12', '2', '3', '4', '2016-01-26 23:34:35', null, '66.33', '0', '8', null, null, null);
 
 -- ----------------------------
 -- Table structure for cp_user

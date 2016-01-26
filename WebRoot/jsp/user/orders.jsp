@@ -34,17 +34,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div class="orders">
 	<s:iterator value="#request.orders" id="order" status="st">
-		<div class="order">
-			<p class="publisher" data-uid2="${order.UID2}" data-id="${st.index}"></p>
+		<div class="order" data-id="${st.index}">
 			<span class="statue" data-statue="${order.statue}">${order.statue}</span>
 			<div class="left">
-				<img src="<%=basePath%>common/img/bookCover/default.png" alt="" data-bid="${order.BID}" data-id="${st.index}">
+				<img src="<%=basePath%>common/img/bookCover/default.png" alt="">
 			</div>
 			<div class="right">
-				<p class="title" data-bid="${order.BID }"  data-id="${st.index} "></p>
+				
+				<a href="buy/toOrder?oid=${order.OID}"><p class="bookname"></p></a>
+				<p class="publisher" data-uid2="${order.UID2}"></p>
+				<p class="amount">${order.amount }</p>
 			</div>
 			<div class="clearfix"></div>
-			<p class="amount">${order.amount }</p>
+			
 		</div>
 	</s:iterator>
 	</div>
@@ -52,15 +54,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
 		var publishers = JSON.parse('${json_pulishers}'),
 			books = JSON.parse('${json_books}'),
-			adds = JSON.parse('${json_addresses}');
-		$('.order').each(function(index, el) {
+			statues = ['等待发货','等待收货','已完成','已关闭'];
+		$(document).ready(function() {
+			$('.order').each(function(index, el) {
+			console.log('===============================');
+			console.log(publishers[index]['username']);
+			console.log(books[index]['name']);
+			//console.log(adds[index]['detail']);
 			var $p = $(this).find('.publisher'),
-				$i = $(this).find('.left img');
-			$p.text(publishers[$p.data('id')]['username']);
+				$i = $(this).find('.left img'),
+				$b = $(this).find('.bookname'),
+				$s = $(this).find('.statue');
+			$p.text(publishers[index]['username']);
+			$b.text(books[index]['name']);
+			$s.text(statues[$s.data('statue')]);
 			console.log($p.data());
-			if (books[$i.data('id')]['cover'] != '') {
-				$i.attr('src', '<%=basePath%>'+books[$i.data('id')]['cover']);
+			if (books[index]['cover'] != undefined &&books[index]['cover'] != '') {
+				$i.attr('src', '<%=basePath%>'+books[index]['cover']);
 			}
+		});
 		});
 	</script>
 </body>

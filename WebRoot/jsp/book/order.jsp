@@ -19,7 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		border-left: 6px solid #626262;
 		margin-top: 10px;
 		padding: 5px 10px;
+		position:absolute;
+		top: 10px;
+		right: 10px;
 	}
+	.order-detail{position:relative}
+	
 </style>
 </head>
 
@@ -44,6 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </div>
+<div class="order-detail">
 	<p class="status bold">
 		订单状态：<span class="red" id="statue"></span>
 	</p>
@@ -101,6 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 		</tbody>
 	</table>
+</div>
 	<script>
 	var statue = ${order.statue},
 		statues = ['等待发货','等待收货','已完成','已关闭'];

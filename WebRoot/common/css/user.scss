@@ -25,18 +25,20 @@
 			td{padding: 10px 5px;border-bottom: 1px solid #999;}
 		}
 	}
-}	
-.orders{
-	.order{
-		position: relative;
-		border: 1px solid #e2e2e2;
-		.statue{position: absolute;top: 0;right: 0;color: red;}
-		.left{float: left;width: 250px;
-			img{display: block;width: 100%;}
-		}
-		.right{float: left;width: 600px;margin-left: 20px;
-			.title{}
-		}
+}
+.order{
+	position: relative;
+	border: 1px solid #e2e2e2;
+	margin: 10px 0;
+	padding: 20px;
+	.statue{position: absolute;top: 20px;right: 20px;color: red;}
+	.left{float: left;width: 250px;
+		img{display: block;width: 100%;border: 1px solid #555}
+	}
+	.right{float: left;width: 600px;margin-left: 20px;
+		.bookname{font-weight:bold;font-size: 1.5em;}
+		.publisher{color: #555;}
+		.amount{color: red; text-align: right;font-size: 1.5em;font-weight: bold;position: absolute;right: 20px; bottom: 20px;}
 	}
 	
 }
