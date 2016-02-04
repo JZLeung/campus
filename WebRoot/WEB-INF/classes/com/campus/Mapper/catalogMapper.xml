@@ -4,10 +4,13 @@
 例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
  -->
 <mapper namespace="Mapper.catalogMapper">
-    <select id="getCatalogByCId" parameterType="int" resultType="Catalog">
+    <select id="getCatalogByParent" parameterType="int" resultType="Catalog">
         select * from cp_catalog where parent=#{CID}
     </select>
     <select id="getAllCatalogs" resultType="Catalog">
         select * from cp_catalog
+    </select>
+    <select id="getCatalogByCid" parameterType="int" resultType="Catalog">
+        select * from cp_catalog where CID=#{CID}
     </select>
 </mapper>

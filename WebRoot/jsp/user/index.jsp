@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="user/myOrders">我的订单</a>
 		<a href="user/myCollections">我的收藏</a>
 		<a href="user/myBooks">我发布的商品</a>
-		<a href="javascript:void(0)">我的评价</a>
+		<a href="user/mySales">我已卖出的</a>
 	</div>
 	
 	<div class="content">

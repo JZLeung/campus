@@ -70,7 +70,7 @@ public class userAction {
 	 */
 	public void update() {
 		user = (User) commonUtil.getSession("user");
-		System.out.println(updateUser);
+		//System.out.println(updateUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
 		if (user.getPassword().equals(updateUser.getPassword())) {
 			System.out.println(newPass);
@@ -94,7 +94,7 @@ public class userAction {
 			msgMap.put("code", "0");
 		}
 		JSONObject jsonObject = new JSONObject(msgMap);
-		System.out.println(jsonObject.toString());
+		//System.out.println(jsonObject.toString());
 		commonUtil.getPrintWriter().println(jsonObject.toString());
 	}
 	
@@ -103,14 +103,23 @@ public class userAction {
 		if (user == null) {
 			return "login";
 		}
-		//addresses = addressDAO.getAddressByUser(user);
 		orders = orderDAO.getOrderByUID(user.getUID());
 		json_pulishers = new JSONArray(orderDAO.getUsersByOrders(orders)).toString();
 		json_books = new JSONArray(orderDAO.getBooksByOrders(orders)).toString();
-		//json_addresses = new JSONArray(addresses).toString();
-		//System.out.println(json_addresses);
-		System.out.println("json_pulishers:"+json_pulishers);
-		System.out.println("json_books:"+json_books);
+		return "ok";
+	}
+	/**
+	 * 查询一个用户卖出的订单
+	 * @return
+	 */
+	public String mySales() {
+		user = (User) commonUtil.getSession("user");
+		if (user == null) {
+			return "login";
+		}
+		orders = orderDAO.getOrderByUID2(user.getUID());
+		json_pulishers = new JSONArray(orderDAO.getUsersByOrders(orders)).toString();
+		json_books = new JSONArray(orderDAO.getBooksByOrders(orders)).toString();
 		return "ok";
 	}
 	
@@ -140,7 +149,7 @@ public class userAction {
 	 */
 	public String getMyCollections() {
 		books = collectDAO.getAllCollections();
-		System.out.println(books);
+		//System.out.println(books);
 		return "ok";
 	}
 	/**

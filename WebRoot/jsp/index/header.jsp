@@ -4,8 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 User user = (User)request.getSession().getAttribute("user");
 %>
-<link rel="stylesheet" type="text/css" href="<%=basePath%>
-common/css/popup.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/popup.css">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <div class="container">
   <header id="main-header">
@@ -26,18 +25,19 @@ common/css/popup.css">
         <a href="user/index" class="user-info">
           <%=user.getUsername() %></a>
       </li>
+      
       <li>
         <a href="javascrip:void(0)" class="user-logout">退出</a>
+      </li>
+      <li>
+        <a href="user/myOrders" class="user-order">我是买家</a>
       </li>
       <%} %>
       <!-- </ul>
       <ul class="right-part">
         -->
         <li>
-          <a href=""></a>
-        </li>
-        <li>
-          <a href="" class="user-add">我要卖书</a>
+          <a href="book/add" class="user-add">我要卖书</a>
         </li>
       </ul>
       <div class="clearfix"></div>
@@ -142,13 +142,14 @@ common/css/popup.css">
             });
           };
           break;
-        case 'info':
+        <%-- case 'info':
           location.href="<%=basePath%>user/index";
           break;
         case 'add':
           location.href="<%=basePath%>book/add";
-          break;
+          break; --%>
         default:
+        	location.href='<%=basePath%>'+$(this).attr('href');
           break;
       }
     });

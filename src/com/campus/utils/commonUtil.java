@@ -2,8 +2,12 @@ package com.campus.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,5 +75,48 @@ public class commonUtil {
 	 */
 	public static boolean isLogin() {
 		return !(getSession("user") == null);
+	}
+	
+	public static Object getPages(Object objects , int pageIndex , int pageCount) {
+		if (!( objects instanceof java.util.List)) {
+			return objects;
+		}else{
+			int start = pageIndex*pageCount;
+			try {
+				List<Object> list = (List<Object>) objects, result = new ArrayList<Object>();
+				if (list.size() < start) {
+					System.out.println("分页参数错误：分页数量不足");
+					return objects;
+				}else{
+					for (int i = start; i < list.size(); i++) {
+						result.add(list.get(i));
+					}
+					//System.out.println(result);
+					return result;
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.err.println("分页出错："+e);
+				return null;
+			}
+		}
+	}
+	
+	public static Map<String, String> getTimeMap(String start, String end) {
+		Map<String, String> map = new HashMap<String, String>();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        map.put("start",start.equals("") ? "1970-1-1 00:00:00" : start);
+        map.put("end",end.equals("") ? sf.format(c.getTime())+" 00:00:00" : end);
+		System.out.println(map);
+		return map;
+	}
+	public static String getTime(int days) {
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        if (days != 0) {
+			c.add(Calendar.DAY_OF_MONTH, days);
+		}
+        return sf.format(c.getTime());
 	}
 }

@@ -24,7 +24,10 @@ public class orderAction {
 	private User saler;
 	private int bid;
 	private int oid;
-	
+	/**
+	 * 买书操作
+	 * @return
+	 */
 	public String buyBook() {
 		order.setStarttime(new Timestamp(new Date().getTime()));
 		order.setStatue(0);
@@ -32,10 +35,13 @@ public class orderAction {
 		if (dbutils.insert("order", "addOrder", order) > -1) {
 			oid = order.getOID();
 		}
-		System.out.println(oid);
+		//System.out.println(oid);
 		return "ok";
 	}
-	
+	/**
+	 * 跳转至买书的页面
+	 * @return
+	 */
 	public String toBuyBook() {
 		user = (User) commonUtil.getSession("user");
 		if (user == null) {
@@ -46,7 +52,10 @@ public class orderAction {
 		saler = userDAO.findUserById(book.getUID());
 		return "ok";
 	}
-	
+	/**
+	 * 跳转至订单页面
+	 * @return
+	 */
 	public String toOrder() {
 		user = (User) commonUtil.getSession("user");
 		if (user == null) {
@@ -59,7 +68,9 @@ public class orderAction {
 		address = addressDAO.getAddByAID(order.getAID());
 		return "ok";
 	}
-	
+	/**
+	 * 查询该书是否已售出
+	 */
 	public void isCanBuy() {
 		int st = 1;
 		if (!commonUtil.isLogin()) {
@@ -69,8 +80,13 @@ public class orderAction {
 		}
 		commonUtil.print(st);
 	}
-	
-	
+	/**
+	 * 取消订单/确认收货
+	 */
+	public void changeOrder() {
+		//System.out.println(order);
+		commonUtil.print(orderDAO.updateOrder(order));
+	}
 	
 	public User getSaler() {
 		return saler;

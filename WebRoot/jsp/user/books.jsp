@@ -30,10 +30,10 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("books");
 <div class="infoDetail">
 	<div class="tabList">
 		<a href="user/inde">个人信息</a>
-		<a href="javascript:void(0)">我的订单</a>
+		<a href="user/myOrders">我的订单</a>
 		<a href="user/myCollections">我的收藏</a>
 		<a href="javascript:void(0)" class="active">我发布的商品</a>
-		<a href="javascript:void(0)">我的评价</a>
+		<a href="user/mySales">我已卖出的</a>
 	</div>
 	
 	<div class="content">
@@ -55,6 +55,7 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("books");
         			<p class="itemDesc"><%=item.getSummary() %></p>
         			<p class="itemTitle"><%=item.getName() %></p>
         			<p class="itemPrice">￥<font color="red"><%=item.getPrice() %></font></p></a>
+        			<p><a href="book/edit?bid=<%=item.getBID()%>">编辑</a></p>
         		</li>
        	<%}}%>
         </ul>

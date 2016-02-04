@@ -12,8 +12,7 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList");
   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
   <html>
 <head>
-    <base href="<%=basePath%>
-    ">
+    <base href="<%=basePath%>">
     <title>校园二手书交易网</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -44,7 +43,7 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList");
         for(int j = 1; j < list2.size(); j++){
           Catalog childNode = list2.get(j);
       %>
-            <a href="#" >
+            <a href="book/books?cid=<%=childNode.getCID() %>" >
               <%=childNode.getName() %></a>
             <%  } %></ul>
         </li>

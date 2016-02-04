@@ -130,6 +130,18 @@ section#search-box button.btn-search {
   right: 0;
 }
 
+span.rt:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  margin: 0 10px;
+  border: 2px solid #555;
+  transform: rotate(45deg);
+  position: absolute;
+  border-left: 0;
+  border-bottom: 0;
+}
+
 span.red {
   color: red !important;
 }

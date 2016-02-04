@@ -44,6 +44,14 @@ public class orderDAO {
 		return (List<Order>) dbutils.getAll(clazz, "getOrderByUId", UID);
 	}
 	/**
+	 * 获取一个用户所有订单
+	 * @param UID
+	 * @return
+	 */
+	public static List<Order> getOrderByUID2(int UID) {
+		return (List<Order>) dbutils.getAll(clazz, "getOrderByUId2", UID);
+	}
+	/**
 	 * 获取订单中的发布者的信息
 	 * @param orders
 	 * @return
@@ -54,17 +62,29 @@ public class orderDAO {
 			Order order = (Order) iterator.next();
 			users.add((User)dbutils.getOne("user", "getUserById", order.getUID2()));
 		}
-		System.out.println(users);
+		//System.out.println(users);
 		return users;
 	}
-	
+	/**
+	 * 根据一组订单号查出该订单的所有书本
+	 * @param orders
+	 * @return
+	 */
 	public static List<Book> getBooksByOrders(List<Order> orders) {
 		List<Book> books = new ArrayList<Book>();
 		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
 			Order order = (Order) iterator.next();
 			books.add((Book)dbutils.getOne("book", "getBookById", order.getBID()));
 		}
-		System.out.println(books);
+		//System.out.println(books);
 		return books;
+	}
+	
+	public static int updateOrder(Order order) {
+		return dbutils.update(clazz, "changeOrder", order);
+	}
+	
+	public static int countOrders() {
+		return (Integer) dbutils.getOne(clazz, "count");
 	}
 }

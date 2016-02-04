@@ -24,6 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   	<jsp:include page="../index/header.jsp" ></jsp:include>
+  	<p>
+  		<a href="index/index">首页</a> &gt; ${parentCatalog.name} &gt; <a href="book/books?cid=${book.CID}">${childCatalog.name}</a>
+  	</p>
     <div class="bookInfo">
 		<div class="bookHead">
 			<div class="leftCover">

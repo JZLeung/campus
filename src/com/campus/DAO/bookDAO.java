@@ -2,8 +2,11 @@ package com.campus.DAO;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.campus.Class.Book;
 import com.campus.Class.User;
@@ -44,10 +47,29 @@ public class bookDAO {
 		book.setPublishtime(Timestamp.valueOf(time));
 		return dbutils.insert(clazz, "addBook", book);
 	}
-	
+	/**
+	 * 获取用户发布的所有书
+	 * @return
+	 */
 	public static List<Book> getBooksByUID() {
 		User user = (User) commonUtil.getSession("user");
 		return (List<Book>) dbutils.getAll(clazz, "getBookByUId", user);
 	}
 	
+	public static List<Book> getBooksByCID(int cid) {
+		return (List<Book>) dbutils.getAll(clazz, "getBookByCId", cid);
+	}
+	
+	public static int updateBook(Book book) {
+		return dbutils.update(clazz, "updateBook", book);
+	}
+	
+	public static int countBooks() {
+		return (Integer) dbutils.getOne(clazz, "count");
+	}
+	
+	public static List<Book> getNewBooks(String start, String end) {
+		Map<String, String> map = commonUtil.getTimeMap(start, end);
+		return (List<Book>) dbutils.getAll(clazz, "getNewBook", map);
+	}
 }

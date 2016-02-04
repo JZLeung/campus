@@ -8,6 +8,7 @@
     		<result name="ok">/jsp/book/bookInfo.jsp</result>
     		<result name="error">/jsp/book/error.jsp</result>
     	</action>
+    	
     	<action name="add" class="com.campus.Actions.bookAction" method="redirectToAdd">
     		<result name="add">/jsp/book/addBook.jsp</result>
     		<result name="error">/jsp/user/login.jsp</result>
@@ -15,6 +16,19 @@
     	<action name="addBook" class="com.campus.Actions.bookAction" method="addBook">
     		<result name="ok" type="redirect">index?bid=${bid}</result>
     		<result name="error">/jsp/book/addBook.jsp</result>
+    	</action>
+    	
+    	<action name="edit" class="com.campus.Actions.bookAction" method="redirectToEdit">
+    		<result name="edit">/jsp/book/edit.jsp</result>
+    		<result name="error">/jsp/book/info.jsp</result>
+    	</action>
+    	<action name="editBook" class="com.campus.Actions.bookAction" method="editBook">
+    		<result name="ok" type="redirect">index?bid=${bid}</result>
+    		<result name="error">/jsp/book/edit.jsp</result>
+    	</action>
+    	
+    	<action name="books" class="com.campus.Actions.bookAction" method="getBooksByCID">
+    		<result name="ok">/jsp/book/books.jsp</result>
     	</action>
     </package>
 </struts>

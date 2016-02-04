@@ -9,14 +9,20 @@
     		<result name="login">/jsp/user/login.jsp</result>
     	</action>
     	<action name="myCollections" class="com.campus.Actions.userAction" method="getMyCollections">
+    		<result name="login">/jsp/user/login.jsp</result>
     		<result name="ok">/jsp/user/collect.jsp</result>
     	</action>
     	<action name="myBooks" class="com.campus.Actions.userAction" method="getMyBooks">
+    		<result name="login">/jsp/user/login.jsp</result>
     		<result name="ok">/jsp/user/books.jsp</result>
     	</action>
     	<action name="myOrders" class="com.campus.Actions.userAction" method="myOrders">
     		<result name="login">/jsp/user/login.jsp</result>
     		<result name="ok">/jsp/user/orders.jsp</result>
+    	</action>
+    	<action name="mySales" class="com.campus.Actions.userAction" method="mySales">
+    		<result name="login">/jsp/user/login.jsp</result>
+    		<result name="ok">/jsp/user/sales.jsp</result>
     	</action>
     	<action name="Login" class="com.campus.Actions.userAction" method="login">
     	</action>
