@@ -21,6 +21,7 @@
 .all-statue{
 	width: 100%;
 	padding-top: 20px;
+	h1{margin-left: 20px;padding: 10px 0;}
 }
 .statue{
 	width: 33%;
@@ -44,7 +45,16 @@
 			font-weight: bold;
 		}
 	}
-	&:nth-child(1){border-color: #00796B;color: #00796B;}
-	&:nth-child(2){border-color: #9C27B0;color: #9C27B0;}
-	&:nth-child(3){border-color: #FF5722;color: #FF5722;}
+	&:nth-child(2){border-color: #00796B;color: #00796B;}
+	&:nth-child(3){border-color: #9C27B0;color: #9C27B0;}
+	&:nth-child(4){border-color: #FF5722;color: #FF5722;}
+}
+p.time {
+    position: absolute;
+    bottom: 10px;
+    right: 50%;
+    margin-right: -58px;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: bold;
 }

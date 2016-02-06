@@ -3,10 +3,12 @@ package com.campus.DAO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.campus.Class.Book;
 import com.campus.Class.Order;
 import com.campus.Class.User;
+import com.campus.utils.commonUtil;
 import com.campus.utils.dbutils;
 
 public class orderDAO {
@@ -86,5 +88,14 @@ public class orderDAO {
 	
 	public static int countOrders() {
 		return (Integer) dbutils.getOne(clazz, "count");
+	}
+	
+	public static List<Order> getNewOrders(String start, String end) {
+		Map<String, String> map = commonUtil.getTimeMap(start, end);
+		return (List<Order>) dbutils.getAll(clazz, "getNewOrders", map);
+	}
+	
+	public static List<Order> getAllOrders() {
+		return (List<Order>) dbutils.getAll(clazz, "getAllOrders");
 	}
 }

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +102,12 @@ public class commonUtil {
 			}
 		}
 	}
-	
+	/**
+	 * 获取一个搜索时间的时间段集合
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public static Map<String, String> getTimeMap(String start, String end) {
 		Map<String, String> map = new HashMap<String, String>();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -111,6 +117,11 @@ public class commonUtil {
 		System.out.println(map);
 		return map;
 	}
+	/**
+	 * 获取一个时间格式
+	 * @param days
+	 * @return
+	 */
 	public static String getTime(int days) {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
@@ -118,5 +129,11 @@ public class commonUtil {
 			c.add(Calendar.DAY_OF_MONTH, days);
 		}
         return sf.format(c.getTime());
+	}
+	
+	public static String getNowTime() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		return df.format(new Date());
+		
 	}
 }

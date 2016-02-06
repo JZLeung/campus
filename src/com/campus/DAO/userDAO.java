@@ -72,6 +72,6 @@ public class userDAO {
 	
 	public static List<User> getNewUsers(String start, String end) {
 		Map<String, String> map = commonUtil.getTimeMap(start, end);
-		return (List<User>) dbutils.getAll(clazz, "getAllUser",map);
+		return (List<User>) dbutils.getAll(clazz, "getNewUser",map);
 	}
 }

@@ -233,6 +233,10 @@ span.red {
   width: 100%;
   padding-top: 20px;
 }
+.all-statue h1 {
+  margin-left: 20px;
+  padding: 10px 0;
+}
 
 .statue {
   width: 33%;
@@ -257,15 +261,25 @@ span.red {
   font-size: 5em;
   font-weight: bold;
 }
-.statue:nth-child(1) {
+.statue:nth-child(2) {
   border-color: #00796B;
   color: #00796B;
 }
-.statue:nth-child(2) {
+.statue:nth-child(3) {
   border-color: #9C27B0;
   color: #9C27B0;
 }
-.statue:nth-child(3) {
+.statue:nth-child(4) {
   border-color: #FF5722;
   color: #FF5722;
+}
+
+p.time {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  margin-right: -58px;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
 }

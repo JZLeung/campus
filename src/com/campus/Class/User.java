@@ -1,6 +1,6 @@
 package com.campus.Class;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class User {
 	String username;
@@ -8,8 +8,8 @@ public class User {
 	String password;
 	String email;
 	int isactive;
-	Date registtime;
-	Date lastlogin;
+	Timestamp registtime;
+	Timestamp lastlogin;
 	String collection;
 	String address;
 	String portrail;
@@ -57,16 +57,16 @@ public class User {
 	public void setIsactive(int isactive) {
 		this.isactive = isactive;
 	}
-	public Date getRegisttime() {
+	public Timestamp getRegisttime() {
 		return registtime;
 	}
-	public void setRegisttime(Date registtime) {
+	public void setRegisttime(Timestamp registtime) {
 		this.registtime = registtime;
 	}
-	public Date getLastlogin() {
+	public Timestamp getLastlogin() {
 		return lastlogin;
 	}
-	public void setLastlogin(Date lastlogin) {
+	public void setLastlogin(Timestamp lastlogin) {
 		this.lastlogin = lastlogin;
 	}
 	public String getCollection() {

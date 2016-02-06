@@ -15,5 +15,20 @@
     		<result name="login">/jsp/admin/login.jsp</result>
     		<result name="ok">/jsp/admin/index.jsp</result>
     	</action>
+    	
+    	<action name="users" class="com.campus.Admin.users">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/users.jsp</result>
+    	</action>
+    	
+    	<action name="books" class="com.campus.Admin.books">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/books.jsp</result>
+    	</action>
+    	
+    	<action name="orders" class="com.campus.Admin.orders">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/orders.jsp</result>
+    	</action>
     </package>
 </struts>

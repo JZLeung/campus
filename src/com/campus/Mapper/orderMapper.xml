@@ -7,6 +7,9 @@
 	<select id="count" resultType="int">
     	select count(*) from cp_orders
     </select>
+    <select id="getAllOrders" resultType="Order">
+    	select * from cp_orders
+    </select>
 	<select id="getOrderByBId" parameterType="int" resultType="Order">
         select * from cp_orders where BID=#{BID}
     </select>
@@ -18,6 +21,9 @@
     </select>
     <select id="getOrderByOID" parameterType="int" resultType="Order">
         select * from cp_orders where OID=#{OID}
+    </select>
+    <select id="getNewOrders" parameterType="Map" resultType="Order">
+        select * from cp_orders where starttime  &gt;= #{start} and starttime &lt;= #{end}
     </select>
     <update id="changeOrder" parameterType="Order">
         update cp_orders set 

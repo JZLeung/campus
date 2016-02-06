@@ -84,7 +84,9 @@ public class orderAction {
 	 * 取消订单/确认收货
 	 */
 	public void changeOrder() {
-		//System.out.println(order);
+		
+		order.setEndtime(new Timestamp(System.currentTimeMillis()));
+		System.out.println(order);
 		commonUtil.print(orderDAO.updateOrder(order));
 	}
 	

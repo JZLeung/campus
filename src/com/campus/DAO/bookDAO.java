@@ -55,19 +55,35 @@ public class bookDAO {
 		User user = (User) commonUtil.getSession("user");
 		return (List<Book>) dbutils.getAll(clazz, "getBookByUId", user);
 	}
-	
+	/**
+	 * 根据分类查找书本
+	 * @param cid
+	 * @return
+	 */
 	public static List<Book> getBooksByCID(int cid) {
 		return (List<Book>) dbutils.getAll(clazz, "getBookByCId", cid);
 	}
-	
+	/**
+	 * 更新书本
+	 * @param book
+	 * @return
+	 */
 	public static int updateBook(Book book) {
 		return dbutils.update(clazz, "updateBook", book);
 	}
-	
+	/**
+	 * 获取书的数目
+	 * @return
+	 */
 	public static int countBooks() {
 		return (Integer) dbutils.getOne(clazz, "count");
 	}
-	
+	/**
+	 * 获取一周内新上架的书本
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public static List<Book> getNewBooks(String start, String end) {
 		Map<String, String> map = commonUtil.getTimeMap(start, end);
 		return (List<Book>) dbutils.getAll(clazz, "getNewBook", map);
