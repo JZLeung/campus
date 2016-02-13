@@ -58,3 +58,24 @@ p.time {
     font-size: 0.8em;
     font-weight: bold;
 }
+.mask{
+	position: fixed;
+	top: 0;left: 0;bottom: 0;right: 0;
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+.detail2{
+	height: 200px;
+	width: 300px;
+	background-color: #fff;
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -100px;
+	overflow-y: auto;
+	display: none;
+	padding: 0 50px;
+	.close{float: right;}
+	* {margin-top: 10px;}
+}

@@ -60,9 +60,29 @@ public class orderDAO {
 	 */
 	public static List<User> getUsersByOrders(List<Order> orders) {
 		List<User> users = new ArrayList<User>();
+		User user;
 		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
 			Order order = (Order) iterator.next();
-			users.add((User)dbutils.getOne("user", "getUserById", order.getUID2()));
+			user = (User)dbutils.getOne("user", "getUserById", order.getUID2());
+			user.setPassword("");
+			users.add(user);
+		}
+		//System.out.println(users);
+		return users;
+	}
+	/**
+	 * 获取订单的购买者
+	 * @param orders
+	 * @return
+	 */
+	public static List<User> getBuyerByOrders(List<Order> orders) {
+		List<User> users = new ArrayList<User>();
+		User user;
+		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
+			Order order = (Order) iterator.next();
+			user = (User)dbutils.getOne("user", "getUserById", order.getUID2());
+			user.setPassword("");
+			users.add(user);
 		}
 		//System.out.println(users);
 		return users;

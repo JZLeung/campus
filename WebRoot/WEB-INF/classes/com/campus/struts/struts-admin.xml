@@ -4,6 +4,15 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
     <package name="admin" extends="struts-default" namespace="/admin">
+    	<action name="getPublishers" class="com.campus.Admin.orders" method="getPublishers">
+    	</action>
+    	<action name="getCustomers" class="com.campus.Admin.orders" method="getCustomers">
+    	</action>
+    	<action name="getBooks" class="com.campus.Admin.orders" method="getBooks">
+    	</action>
+    	
+    
+    
     	<action name="login" class="com.campus.Admin.index" method="toLogin">
     		<result name="ok">/jsp/admin/login.jsp</result>
     	</action>

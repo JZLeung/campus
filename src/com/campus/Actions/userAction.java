@@ -1,5 +1,7 @@
 package com.campus.Actions;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,8 @@ public class userAction {
 		//System.out.println(user);
 		User loginedUser = userDAO.login(user);
 		if (loginedUser != null) {
+			loginedUser.setLastlogin(new Timestamp(new Date().getTime()));
+			userDAO.update(loginedUser);
 			commonUtil.setSession("user", loginedUser);
 			commonUtil.getPrintWriter().println("1");
 		}else{
