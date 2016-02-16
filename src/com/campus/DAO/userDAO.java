@@ -59,9 +59,13 @@ public class userDAO {
 	 * @return
 	 */
 	public static int update(User updateUser) {
-		return dbutils.insert(clazz, "updateUser", updateUser);
+		System.out.println(updateUser);
+		return dbutils.update(clazz, "updateUser", updateUser);
 	}
-	
+	public static int resetLogin(User updateUser) {
+		System.out.println(updateUser);
+		return dbutils.update(clazz, "resetLogin", updateUser);
+	}
 	public static int countUsers() {
 		return (Integer) dbutils.getOne(clazz, "count");
 	}

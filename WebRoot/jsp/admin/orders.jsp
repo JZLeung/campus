@@ -1,7 +1,36 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.campus.Class.Address,com.campus.Class.User,com.campus.Class.Order"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+int page1, page2 , pageCount , allPage = ((List<Order>)request.getAttribute("allOrders")).size();
+//获取分页参数
+try{
+	page1 = Integer.parseInt((String) request.getParameter("page1")) -1 ;
+}catch(Exception e){
+	page1 = 0;
+}
+
+try{
+	page2 = Integer.parseInt((String) request.getParameter("page2")) -1 ;
+}catch(Exception e){
+	page2 = 0;
+}
+
+try{
+	pageCount = Integer.parseInt((String) request.getParameter("pageCount"));
+}catch(Exception e){
+	pageCount = 5;
+}
+//处理分页参数
+if(page1 * pageCount > allPage){
+	page1 = 0;
+}
+if(page2 * pageCount > allPage){
+	page2 = 0;
+}
+
+System.out.println(page1+"-"+page2+"-"+pageCount+"-"+allPage);
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 
@@ -49,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="#request.allOrders" id="order">
+					<s:iterator value="#request.allOrders" id="order" status="st">
 						<tr data-id="${order.OID }">
 							<td>${order.OID }</td>
 							<td data-id="${order.BID }" class="book">${order.BID }</td>
@@ -58,14 +87,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${order.starttime }</td>
 							<td>￥<span class="red">${order.amount }</span></td>
 							<td data-id="${order.statue }" class="statue"></td>
-							<%-- <td>${user.registtime }</td>
-							<td>${user.lastlogin }</td>
-							<td class="address" data-data="${user.address}"></td>
-							<td class="collection" data-data="${user.collection}"></td> --%>
 						</tr>
 					</s:iterator>
 				</tbody>
 			</table>
+			<div class="page page-all">
+				<ul class="page-list">
+				</ul>
+			</div>
 		</div>
 		<div id="neworder" class="orders">
 			<h2>新商品信息（一周内）</h2>
@@ -100,6 +129,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</s:iterator>
 				</tbody>
 			</table>
+			<div class="page page-new">
+				<ul class="page-list">
+				</ul>
+			</div>
 		</div>
 	</div>
 	<div class="mask" id="mask"></div>
@@ -115,12 +148,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var allPublishers, newPublishers, pf = false,
 			allBuyers, newBuyers, bf1 = false,
 			allBooks, newBooks, bf2 = false; 
+
+		var page1 = ${page1} , page2 = ${page2} ,
+			allPage1 = ${allPage1} ,allPage2 = ${allPage2},
+			maxPages = 5, j;
+
 		var $popup = $('#detail'),
 			$mask = $('#mask');
 		$(document).ready(function() {
 			
 			var statue = ['等待发货','等待收货','已完成','已关闭'];
-			$.get('admin/getPublishers', function(data) {
+			$.get('admin/getPublishers',{page1:page1,page2:page2}, function(data) {
 				//console.log(data);
 				data = $.parseJSON(data);
 				allPublishers = data['all'];
@@ -128,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				pf = true;
 				checkIsOK();
 			});
-			$.get('admin/getCustomers', function(data) {
+			$.get('admin/getCustomers',{page1:page1,page2:page2}, function(data) {
 				//console.log(data);
 				data = $.parseJSON(data);
 				allBuyers = data['all'];
@@ -136,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				bf1 = true;
 				checkIsOK();
 			});
-			$.get('admin/getBooks', function(data) {
+			$.get('admin/getBooks',{page1:page1,page2:page2}, function(data) {
 				//console.log(data);
 				data = $.parseJSON(data);
 				allBooks = data['all'];
@@ -216,6 +254,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 				return data;
 			}
+
+
+			console.log(allPage1+":"+allPage2);
+			function setPage(curPage, allSize, type) {
+				var html='' , t = type == 1 ? 'page1' : 'page2' , pageCount = 5;
+				var allPage = allSize / pageCount;
+				for(j = 0 ; j < allPage && j < maxPages ; j++){
+					if (j != page1) {
+						html += '<li><a href="admin/orders?'+t+'='+j+'">'+(j+1)+'</a></li>';
+					}else{
+						html += '<li class="current">'+(j+1)+'</li>';
+					}
+				}
+				if(j < allPage){
+		   			html += '<li>...</li>';
+		   			html += '<li><a href="admin/books?'+t+'='+(allPage-1)+'">尾页</a></li>';
+		      	}
+		      	return html;
+			}
+			var ul1 = setPage(page1, allPage1,1);
+	      	$('.page-all').find('ul.page-list').html(ul1);
+	      	var ul2 = setPage(page2, allPage2,2);
+	      	$('.page-new').find('ul.page-list').html(ul2);
 		});
 	</script>
 </body>

@@ -77,11 +77,18 @@ public class commonUtil {
 	public static boolean isLogin() {
 		return !(getSession("user") == null);
 	}
-	
+	/**
+	 * 获取分页信息
+	 * @param objects 需要分页的对象
+	 * @param pageIndex 从第几页开始
+	 * @param pageCount 每页多少数据
+	 * @return
+	 */
 	public static Object getPages(Object objects , int pageIndex , int pageCount) {
 		if (!( objects instanceof java.util.List)) {
 			return objects;
 		}else{
+			System.out.println(pageIndex + " - " + pageCount);
 			int start = pageIndex*pageCount;
 			try {
 				List<Object> list = (List<Object>) objects, result = new ArrayList<Object>();
@@ -89,7 +96,7 @@ public class commonUtil {
 					System.out.println("分页参数错误：分页数量不足");
 					return objects;
 				}else{
-					for (int i = start; i < list.size(); i++) {
+					for (int i = start;i < start + pageCount && i < list.size(); i++) {
 						result.add(list.get(i));
 					}
 					//System.out.println(result);
@@ -113,7 +120,7 @@ public class commonUtil {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         map.put("start",start.equals("") ? "1970-1-1 00:00:00" : start);
-        map.put("end",end.equals("") ? sf.format(c.getTime())+" 00:00:00" : end);
+        map.put("end",end.equals("") ? getTime(1)+" 00:00:00" : end);
 		System.out.println(map);
 		return map;
 	}

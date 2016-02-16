@@ -28,6 +28,9 @@ public class bookAction {
 	private Catalog parentCatalog;
 	private Catalog childCatalog;
 	
+	private int page;
+	private int allPages;
+	
 	private List<Book> bookList;
 	private List<List<Catalog>> catalogList;
 	/**
@@ -75,6 +78,10 @@ public class bookAction {
 		collected = collectDAO.isCollected(bid);
 		statue = orderDAO.isInOrder(bid);
 		System.out.println(statue);
+		
+		
+		
+		
 		return "ok";
 	}
 	/**
@@ -84,6 +91,10 @@ public class bookAction {
 	public String getBooksByCID() {
 		bookList = bookDAO.getBooksByCID(cid);
 		catalogList = catalogDAO.getAllCatalog();
+		allPages = bookList.size();
+		int pageCount = 8;
+		bookList = (List<Book>) commonUtil.getPages(bookList, page, pageCount);
+		
 		return "ok";
 	}
 	/**
@@ -235,6 +246,18 @@ public class bookAction {
 
 	public void setBid(int bid) {
 		this.bid = bid;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getAllPages() {
+		return allPages;
+	}
+	public void setAllPages(int allPages) {
+		this.allPages = allPages;
 	}
 
 	

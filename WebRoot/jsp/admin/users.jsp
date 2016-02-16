@@ -64,6 +64,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</s:iterator>
 				</tbody>
 			</table>
+			<div class="page page-all">
+	          <ul class="page-list">
+	          </ul>
+	        </div>
 		</div>
 		<div id="newUser" class="users">
 			<h2>新用户信息（一周内）</h2>
@@ -97,6 +101,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</s:iterator>
 				</tbody>
 			</table>
+			<div class="page page-new">
+	          <ul class="page-list">
+	          </ul>
+	        </div>
 		</div>
 	</div>
 	<script src="<%=basePath%>common/js/jquery-1.7.1.min.js" type="text/javascript"></script>
@@ -118,6 +126,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$c.text(dc.length); */
 			if (index % 2 != 0) {self.addClass('even')};
 		})
+		
+		var page1 = ${page1} , page2 = ${page2} ,
+			allPage1 = ${allPage1} ,allPage2 = ${allPage2},
+			maxPages = 5, j;
+		console.log(allPage1+":"+allPage2);
+		function setPage(curPage, allSize, type) {
+			var html='' , t = type == 1 ? 'page1' : 'page2' , pageCount = 5;
+			var allPage = allSize / pageCount;
+			for(j = 0 ; j < allPage && j < maxPages ; j++){
+				if (j != page1) {
+					html += '<li><a href="admin/users?'+t+'='+j+'">'+(j+1)+'</a></li>';
+				}else{
+					html += '<li class="current">'+(j+1)+'</li>';
+				}
+			}
+			if(j < allPage){
+	   			html += '<li>...</li>';
+	   			html += '<li><a href="admin/users?'+t+'='+(allPage-1)+'">尾页</a></li>';
+	      	}
+	      	return html;
+		}
+		var ul1 = setPage(page1, allPage1,1);
+      	$('.page-all').find('ul.page-list').html(ul1);
+      	var ul2 = setPage(page2, allPage2,2);
+      	$('.page-new').find('ul.page-list').html(ul2);
 	});
 	</script>
 </body>

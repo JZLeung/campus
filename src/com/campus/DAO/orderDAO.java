@@ -80,7 +80,7 @@ public class orderDAO {
 		User user;
 		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
 			Order order = (Order) iterator.next();
-			user = (User)dbutils.getOne("user", "getUserById", order.getUID2());
+			user = (User)dbutils.getOne("user", "getUserById", order.getUID1());
 			user.setPassword("");
 			users.add(user);
 		}

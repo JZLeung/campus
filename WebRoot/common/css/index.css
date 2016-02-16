@@ -130,6 +130,21 @@ section#search-box button.btn-search {
   right: 0;
 }
 
+.page {
+  float: right;
+}
+
+.page-list li {
+  float: left;
+  padding: 5px 10px;
+  padding-right: 20px;
+  text-decoration: underline;
+}
+.page-list li.current {
+  color: red;
+  text-decoration: none;
+}
+
 span.rt:before {
   content: "";
   height: 10px;

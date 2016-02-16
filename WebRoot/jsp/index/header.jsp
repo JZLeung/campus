@@ -46,9 +46,10 @@ User user = (User)request.getSession().getAttribute("user");
       <a href="<%=basePath%>index/index">
         <img src="<%=basePath%>common/img/campus_logo.jpg" class="campus-logo" alt="Logo"></a>
       <section id="search-box">
-
-        <input type="text" id="search-input">
-        <button class="btn btn-search">找书</button>
+		<form action="book/search" id="s-form" method="post">
+        	<input type="text" id="search-input" name="name">
+        	<button class="btn btn-search" id="submit">找书</button>
+        </form>
       </section>
       <div class="clearfix"></div>
     </div>
@@ -152,6 +153,10 @@ User user = (User)request.getSession().getAttribute("user");
         	location.href='<%=basePath%>'+$(this).attr('href');
           break;
       }
+    });
+    
+    $("#submit").click(function(e){
+    	$('#s-form').submit();
     });
   });
 </script>

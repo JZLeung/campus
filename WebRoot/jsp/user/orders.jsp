@@ -1,8 +1,37 @@
-<%@page import="com.campus.Class.Address,com.campus.Class.User"%>
+<%@page import="com.campus.Class.Address,com.campus.Class.User,com.campus.Class.Order"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+int page1, page2 , pageCount , allPage = ((List<Order>)request.getAttribute("orders")).size();
+System.out.println(allPage);
+//获取分页参数
+try{
+	page1 = Integer.parseInt((String) request.getParameter("page1")) -1 ;
+}catch(Exception e){
+	page1 = 0;
+}
+
+try{
+	page2 = Integer.parseInt((String) request.getParameter("page2")) -1 ;
+}catch(Exception e){
+	page2 = 0;
+}
+
+try{
+	pageCount = Integer.parseInt((String) request.getParameter("pageCount"));
+}catch(Exception e){
+	pageCount = 4;
+}
+//处理分页参数
+if(page1 * pageCount > allPage){
+	page1 = 0;
+}
+if(page2 * pageCount > allPage){
+	page2 = 0;
+}
+
+System.out.println(page1+"  "+page2+"   "+pageCount+"  "+allPage);
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 

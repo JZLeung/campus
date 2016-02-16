@@ -23,7 +23,10 @@
         insert cp_user(username, password, email, registtime) values(#{username} , #{password} , #{email} , #{registtime})
     </insert>
     <update id="updateUser" parameterType="User">
-        update cp_user set username = #{username} , password = #{password} , email = #{email} , phone = #{phone} where uid = #{UID}
+        update cp_user set username = #{username} , password = #{password} , email = #{email} , phone = #{phone} , lastlogin = #{lastlogin} where UID = #{UID}
+    </update>
+    <update id="resetLogin" parameterType="User">
+        update cp_user set lastlogin = #{lastlogin}, registtime = #{registtime} where UID = #{UID}
     </update>
     <delete id="deleteUser" parameterType="int">
         delete from cp_user where UID=#{UID}

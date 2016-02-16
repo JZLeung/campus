@@ -24,6 +24,12 @@ public class orders {
 	private List<User> newCustomers;
 	private List<Book> newBooks;
 	
+	private int page1;
+	private int page2;
+	private int allPage1;
+	private int allPage2;
+	private int pageCount = 5;
+	
 	private String hash;
 	
 	@SuppressWarnings("unchecked")
@@ -33,91 +39,71 @@ public class orders {
 		}
 		/*获取订单*/
 		getOrders();
-		/*获取发布者消息*/
-		
-		/*获取购买者*/
-		
-		/*获取书本*/
-		
-		
 		if (hash == null || hash.equals("")) {
 			hash = "Orders";
 		}
-		//System.err.println(newOrders);
-		//System.out.println(allOrders);
 		return "ok";
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void getPublishers() {
 		getOrders();
-		/*allPulishers = (List<User>) commonUtil.getSession("allPulishers");
-		if(allPulishers == null){*/
-			allPulishers = orderDAO.getUsersByOrders(allOrders);
-			//commonUtil.setSession("allPulishers", allPulishers);
-		/*}
-		
-		newPulishers = (List<User>) commonUtil.getSession("newPulishers");
-		if(newPulishers == null){*/
-			newPulishers = orderDAO.getUsersByOrders(newOrders);
-			//commonUtil.setSession("newPulishers", newPulishers);
-		//}
+		allPulishers = (List<User>) commonUtil.getPages(orderDAO.getUsersByOrders(this.allOrders), this.page1, pageCount);
+		newPulishers = (List<User>) commonUtil.getPages(orderDAO.getUsersByOrders(this.newOrders), this.page2, pageCount);
 		Map<String, List<User>> map = new HashMap<String, List<User>>();
 		map.put("all", allPulishers);
 		map.put("new", newPulishers);
 		commonUtil.print(new JSONObject(map));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void getCustomers() {
 		getOrders();
-		/*allCustomers = (List<User>) commonUtil.getSession("allCustomers");
-		if(allCustomers == null){*/
-			allCustomers = orderDAO.getBuyerByOrders(allOrders);
-			//commonUtil.setSession("allCustomers", allCustomers);
-		/*}
-		
-		newCustomers = (List<User>) commonUtil.getSession("newCustomers");
-		if(newCustomers == null){*/
-			newCustomers = orderDAO.getBuyerByOrders(newOrders);
-			//commonUtil.setSession("newCustomers", newCustomers);
-		//}
+		allCustomers = (List<User>) commonUtil.getPages(orderDAO.getBuyerByOrders(this.allOrders), this.page1, pageCount);
+		newCustomers = (List<User>) commonUtil.getPages(orderDAO.getBuyerByOrders(this.newOrders), this.page2, pageCount);
 		Map<String, List<User>> map = new HashMap<String, List<User>>();
 		map.put("all", allCustomers);
 		map.put("new", newCustomers);
 		commonUtil.print(new JSONObject(map));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void getBooks() {
 		getOrders();
-		/*allBooks = (List<Book>) commonUtil.getSession("allBooks");
-		if(allBooks == null){*/
-			allBooks = orderDAO.getBooksByOrders(allOrders);
-			//commonUtil.setSession("allBooks", allBooks);
-		/*}
-		
-		newBooks = (List<Book>) commonUtil.getSession("newBooks");
-		if(newBooks == null){*/
-			newBooks = orderDAO.getBooksByOrders(newOrders);
-			//commonUtil.setSession("newBooks", newBooks);
-		//}
+		allBooks = (List<Book>) commonUtil.getPages(orderDAO.getBooksByOrders(this.allOrders), this.page1, pageCount);
+		newBooks = (List<Book>) commonUtil.getPages(orderDAO.getBooksByOrders(this.newOrders), this.page2, pageCount);
 		Map<String, List<Book>> map = new HashMap<String, List<Book>>();
 		map.put("all", allBooks);
 		map.put("new", newBooks);
 		commonUtil.print(new JSONObject(map));
 	}
-	
+	@SuppressWarnings("unchecked")
 	public void getOrders() {
-		this.allOrders = (List<Order>) commonUtil.getSession("allOrders");
-		if(this.allOrders == null){
-			this.allOrders = orderDAO.getAllOrders();
-			commonUtil.setSession("allOrders", this.allOrders);
+		List<Order> allOrders1;// = (List<Order>) commonUtil.getSession("allOrders");
+		//if(allOrders1 == null){
+			allOrders1 = orderDAO.getAllOrders();
+			commonUtil.setSession("allOrders", allOrders1);
+		//}
+		this.allPage1 = allOrders1.size();
+		if (this.page1 * pageCount > this.allPage1) {
+			this.page1 = 0;
 		}
+		this.allOrders = (List<Order>) commonUtil.getPages(allOrders1, this.page1, pageCount);
 		
-		this.newOrders = (List<Order>) commonUtil.getSession("newOrders");
-		if(this.newOrders == null){
+		
+		
+		List<Order> newOrders1;// = (List<Order>) commonUtil.getSession("newOrders");
+		//if(newOrders1 == null){
 			String start = commonUtil.getTime(-7);
-			this.newOrders = orderDAO.getNewOrders(start,"");
-			commonUtil.setSession("newOrders", this.newOrders);
+			newOrders1 = orderDAO.getNewOrders(start,"");
+			commonUtil.setSession("newOrders", newOrders1);
+		//}
+		this.allPage2 = newOrders1.size();
+		if (this.page2 * pageCount > this.allPage2) {
+			this.page2 = 0;
 		}
+		this.newOrders = (List<Order>) commonUtil.getPages(newOrders1, this.page2, pageCount);
+		System.out.println(page1+"-:-"+page2);
 		//System.out.println(allOrders);
 		//System.out.println(newOrders);
 	}
@@ -193,5 +179,38 @@ public class orders {
 	public void setNewBooks(List<Book> newBooks) {
 		this.newBooks = newBooks;
 	}
+
+	public int getPage1() {
+		return page1;
+	}
+
+	public void setPage1(int page1) {
+		this.page1 = page1;
+	}
+
+	public int getPage2() {
+		return page2;
+	}
+
+	public void setPage2(int page2) {
+		this.page2 = page2;
+	}
+
+	public int getAllPage1() {
+		return allPage1;
+	}
+
+	public void setAllPage1(int allPage1) {
+		this.allPage1 = allPage1;
+	}
+
+	public int getAllPage2() {
+		return allPage2;
+	}
+
+	public void setAllPage2(int allPage2) {
+		this.allPage2 = allPage2;
+	}
+
 	
 }

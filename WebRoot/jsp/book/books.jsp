@@ -69,6 +69,10 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList");
        	<%}%>
         </ul>
       </div>
+      <div class="page page-all">
+			<ul class="page-list">
+			</ul>
+		</div>
     </div>
   <script src="<%=basePath%>common/js/slideBox.js" type="text/javascript"></script>
   
@@ -77,6 +81,25 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList");
       var carousel = $('.carouselPanel').slideBox({
         carousel:'.imgList'
       });
+      var page = '${page}' || 0, allPage = '${allPages}'|| 0, cid = ${cid};
+      function setPage(curPage, allSize) {
+			var html='' , t = 'page' , pageCount = 5,maxPages = 5;
+			var allPage1 = allSize / pageCount;
+			for(j = 0 ; j < allPage1 && j < maxPages ; j++){
+				if (j != page) {
+					html += '<li><a href="book/books?cid='+cid+'&'+t+'='+j+'">'+(j+1)+'</a></li>';
+				}else{
+					html += '<li class="current">'+(j+1)+'</li>';
+				}
+			}
+			if(j < allPage1){
+	   			html += '<li>...</li>';
+	   			html += '<li><a href="book/books?cid='+cid+'&'+t+'='+(allPage1-1)+'">尾页</a></li>';
+	      	}
+	      	return html;
+		}
+		var ul1 = setPage(page, allPage);
+	     	$('.page-all').find('ul.page-list').html(ul1);
    });
     </script>
     <script>

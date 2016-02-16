@@ -33,6 +33,10 @@
     <select id="getAllBooksByCID" parameterType="int" resultType="Book">
         select * from cp_books where CID = #{CID}
     </select>
+    <select id="searchBook" parameterType="Book" resultType="Book">
+        select * from cp_books where name like '%${name}%'
+    </select>
+    
     <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="BID">
     	<selectKey resultType="int" keyProperty="BID">  
 		  SELECT LAST_INSERT_ID()  

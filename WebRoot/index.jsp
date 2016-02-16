@@ -1,13 +1,31 @@
+<%@page import="org.apache.struts2.components.Else"%>
+<%@page import="com.campus.utils.commonUtil"%>
 <%@ page language="java" import="java.util.*,com.campus.Class.Catalog,com.campus.Class.Book" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 ArrayList<ArrayList<Catalog>> catalogList = (ArrayList<ArrayList<Catalog>>)request.getAttribute("catalogList");
-//System.out.println(catalogList);
-ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList"); 
-//System.out.println(books);
-//System.out.println("index.jsp:"+list);
+ArrayList<Book> books;
+ArrayList<Book> book = (ArrayList<Book>)request.getAttribute("bookList");
+int page2 , pageCount , allPage = book.size();
+//获取分页参数
+try{
+	page2 = Integer.parseInt((String) request.getParameter("page")) -1 ;
+}catch(Exception e){
+	page2 = 0;
+}
+try{
+	pageCount = Integer.parseInt((String) request.getParameter("pageCount"));
+}catch(Exception e){
+	pageCount = 4;
+}
+//System.out.println(page2);
+if(page2 * pageCount > allPage){
+	page2 = 0;
+}
+books = (ArrayList<Book>)commonUtil.getPages(book, page2, pageCount);
+//System.out.println(book.size());
 %>
   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
   <html>
@@ -88,6 +106,26 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("bookList");
         		</li>
        	<%}%>
         </ul>
+        <div class="page">
+          <ul class="page-list">
+            <li><a href="index/index">首页</a></li>
+            <%
+            	int pageCounts = allPage / pageCount +1 , maxPages = 5 , j;
+            	for(j = 0 ; j < pageCounts && j < maxPages ; j++){
+            		if(j != page2){ %>
+            		<li><a href="index/index?page=<%=j+1 %>"><%=j+1 %></a></li>
+            		<% }else{ %>
+            		<li class="current"><%=j+1 %></li>
+            		
+           <% 
+           		} }
+           		if(j < pageCounts){%>
+           			<li>...</li>
+           			<li><a href="index/index?page=<%=pageCounts %>">尾页</a></li>
+           	<%	}
+            %>
+          </ul>
+        </div>
       </div>
     </div>
   <script src="<%=basePath%>common/js/slideBox.js" type="text/javascript"></script>

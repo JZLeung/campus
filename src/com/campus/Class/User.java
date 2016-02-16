@@ -62,6 +62,7 @@ public class User {
 	}
 	public void setRegisttime(Timestamp registtime) {
 		this.registtime = registtime;
+		this.lastlogin = registtime;
 	}
 	public Timestamp getLastlogin() {
 		return lastlogin;
@@ -83,7 +84,7 @@ public class User {
 	}
 	
 	public String toString() {
-		return this.UID+":"+this.getUsername()+","+this.phone+","+this.email;
+		return this.UID+":"+this.getUsername()+","+this.phone+","+this.email+",lastlogin:"+this.lastlogin+",registtime:"+this.registtime;
 	}
 	
 }

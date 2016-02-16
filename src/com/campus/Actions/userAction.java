@@ -41,8 +41,10 @@ public class userAction {
 		//System.out.println(user);
 		User loginedUser = userDAO.login(user);
 		if (loginedUser != null) {
+			System.out.println("before:"+loginedUser.getRegisttime());
 			loginedUser.setLastlogin(new Timestamp(new Date().getTime()));
-			userDAO.update(loginedUser);
+			System.out.println("after:"+loginedUser.getRegisttime());
+			userDAO.resetLogin(loginedUser);
 			commonUtil.setSession("user", loginedUser);
 			commonUtil.getPrintWriter().println("1");
 		}else{
@@ -53,6 +55,8 @@ public class userAction {
 	 * 注册
 	 */
 	public void regist() {
+		
+		addUser.setRegisttime(new Timestamp(new Date().getTime()));
 		System.out.println(addUser);
 		int status = userDAO.regist(addUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
