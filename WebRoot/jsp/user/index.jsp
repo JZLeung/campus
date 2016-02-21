@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<div class="content">
 		<h2>你好，${user.username }</h2>
-		<form id="infoform">
+		<form id="infoform" onsubmit="return false;">
 			<table id="userinfo1">
 				<thead>
 					<tr><th colspan="3" style="text-align:center;font-weight:bold">个人信息</th></tr>
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</td>
 				</tr>
 				<tr hidden class="hidden"> 
-					<td colspan="3" style="text-align:center"><button class="btn" id="submit">确认修改</button></td>
+					<td colspan="3" style="text-align:center"><button class="btn" id="form-submit">确认修改</button></td>
 				</tr>
 			</table>
 		</form>
@@ -204,11 +204,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		setup();
 		//提交修改内容
-		$('#submit').on('click', function(event) {
+		$('#form-submit').on('click', function(event) {
 			event.preventDefault();
 			
 			var data = dataToObj($('#infoform').serializeArray());
-			//console.log(data);
+			var res = Validate.phone(data.phone);
+			if (res !== true) {
+				alert(res);return;
+			}
+			res = Validate.email(data.email);
+			if (res !== true) {
+				alert(res);return;
+			}
 			if (data.password == undefined || data.password == ''){
 				alert("请先输入原密码");return;
 			}else if (data.newpassword != data.repassword) {
@@ -217,12 +224,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			data = setDataNames(data, "updateUser");
 			data['newPass'] = $('#newpassword').val();
+			console.log(data);
 			$.post('<%=basePath%>user/update',data , function(data2, textStatus, xhr) {
 				var d = JSON.parse(data2);
 				console.log(d);
 				if (d.code == '1'){alert("修改成功");location.reload();}
 				else{alert(d.msg);}
 			});
+			return false;
 		});
 		//打开、关闭编辑状态
 		$('#editbtn').on('click', function(event) {

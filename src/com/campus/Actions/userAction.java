@@ -57,6 +57,7 @@ public class userAction {
 	public void regist() {
 		
 		addUser.setRegisttime(new Timestamp(new Date().getTime()));
+		addUser.setLastlogin(new Timestamp(new Date().getTime()));
 		System.out.println(addUser);
 		int status = userDAO.regist(addUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
@@ -78,16 +79,17 @@ public class userAction {
 	 */
 	public void update() {
 		user = (User) commonUtil.getSession("user");
-		//System.out.println(updateUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
 		if (user.getPassword().equals(updateUser.getPassword())) {
-			System.out.println(newPass);
 			if (!updateUser.getPassword().equals(newPass)) {
 				
 				updateUser.setPassword(newPass);
 			}
-			updateUser.setUID(user.getUID());
-			int status = userDAO.update(updateUser);
+			user.setPassword(updateUser.getPassword());
+			user.setPhone(updateUser.getPhone());
+			user.setEmail(updateUser.getEmail());
+			System.out.println(user);
+			int status = userDAO.update(user);
 			if (status > 0) {
 				msgMap.put("msg", "修改成功");
 				msgMap.put("code", "1");

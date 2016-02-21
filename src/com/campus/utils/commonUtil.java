@@ -88,7 +88,7 @@ public class commonUtil {
 		if (!( objects instanceof java.util.List)) {
 			return objects;
 		}else{
-			System.out.println(pageIndex + " - " + pageCount);
+			//System.out.println(pageIndex + " - " + pageCount);
 			int start = pageIndex*pageCount;
 			try {
 				List<Object> list = (List<Object>) objects, result = new ArrayList<Object>();

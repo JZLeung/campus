@@ -12,7 +12,9 @@ public class collectAction {
 		System.out.println("我是static函数");
 		
 	}
-	
+	/**
+	 * 添加收藏
+	 */
 	public void addCollection() {
 		int st;
 		System.out.println(bid);
@@ -25,7 +27,9 @@ public class collectAction {
 			commonUtil.print(-1);
 		}
 	}
-	
+	/**
+	 * 移除收藏
+	 */
 	public void removeCollection() {
 		int st;
 		System.out.println(bid);

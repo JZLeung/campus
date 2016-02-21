@@ -136,7 +136,7 @@ System.out.println(page1+":"+page2+":"+allPage1+":"+allPage2); */
 			var html='' , t = type == 1 ? 'page1' : 'page2' , pageCount = 5;
 			var allPage = allSize / pageCount;
 			for(j = 0 ; j < allPage && j < maxPages ; j++){
-				if (j != page1) {
+				if (j != curPage) {
 					html += '<li><a href="admin/books?'+t+'='+j+'">'+(j+1)+'</a></li>';
 				}else{
 					html += '<li class="current">'+(j+1)+'</li>';

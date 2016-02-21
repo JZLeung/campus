@@ -20,7 +20,7 @@
         select * from cp_user where registtime  &gt;= #{start} and registtime &lt;= #{end}
     </select>
     <insert id="addUser" parameterType="User">
-        insert cp_user(username, password, email, registtime) values(#{username} , #{password} , #{email} , #{registtime})
+        insert cp_user(username, password, email, registtime, lastlogin) values(#{username} , #{password} , #{email} , #{registtime}, #{lastlogin})
     </insert>
     <update id="updateUser" parameterType="User">
         update cp_user set username = #{username} , password = #{password} , email = #{email} , phone = #{phone} , lastlogin = #{lastlogin} where UID = #{UID}

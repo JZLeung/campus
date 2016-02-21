@@ -9,7 +9,10 @@ public class searchAction {
 	private String name;
 	private List<Book> books;
 	
-	
+	/**
+	 * 搜索 图书
+	 * @return
+	 */
 	public String execute() {
 		books = bookDAO.searchBooks(name);
 		System.out.println(name);

@@ -18,7 +18,7 @@ try{
 try{
 	pageCount = Integer.parseInt((String) request.getParameter("pageCount"));
 }catch(Exception e){
-	pageCount = 4;
+	pageCount = 12;
 }
 //System.out.println(page2);
 if(page2 * pageCount > allPage){
