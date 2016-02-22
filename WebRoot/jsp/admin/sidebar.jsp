@@ -14,6 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<li><a href="admin/users">用户管理</a></li>
 		<li><a href="admin/books">书本管理</a></li>
 		<li><a href="admin/orders">订单管理</a></li>
+		<li><a href="admin/hotsells">热销设置</a></li>
 	</ul>
 	<p class="time"></p>
 </div>

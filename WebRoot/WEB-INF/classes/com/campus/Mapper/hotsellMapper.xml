@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="Mapper.hotsellMapper">
+    <select id="getAll" resultType="Hotsell">
+        select * from cp_hotsell
+    </select>
+    <update id="update" parameterType="Hotsell">
+        update cp_hotsell set  title = #{title} , content = #{content} , url = #{url} , img = #{img}   where HID = #{HID}
+    </update>
+    <insert id="add" parameterType="Hotsell">
+        insert into cp_hotsell(title,content,url,img) values(#{title},#{content},#{url},#{img})
+    </insert>
+    <delete id="delete" parameterType="int">delete from cp_hotsell where HID=#{HID}</delete>
+</mapper>

@@ -39,5 +39,16 @@
     		<result name="login">/jsp/admin/login.jsp</result>
     		<result name="ok">/jsp/admin/orders.jsp</result>
     	</action>
+    	
+    	<action name="hotsells" class="com.campus.Admin.hotsells">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/hotsells.jsp</result>
+    	</action>
+    	<action name="hotsell-add" class="com.campus.Admin.hotsells" method="add">
+    	</action>
+    	<action name="hotsell-del" class="com.campus.Admin.hotsells" method="del">
+    	</action>
+    	<action name="hotsell-update" class="com.campus.Admin.hotsells" method="update">
+    	</action>
     </package>
 </struts>

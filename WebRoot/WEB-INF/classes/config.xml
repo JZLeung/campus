@@ -28,6 +28,7 @@
         <mapper resource="com/campus/Mapper/addressMapper.xml"/>
         <mapper resource="com/campus/Mapper/collectMapper.xml"/>
         <mapper resource="com/campus/Mapper/orderMapper.xml"/>
+        <mapper resource="com/campus/Mapper/hotsellMapper.xml"/>
     </mappers>
 
 </configuration>
