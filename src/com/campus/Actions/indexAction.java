@@ -29,10 +29,7 @@ public class indexAction {
 	public void setBookList(List<Book> bookList) {
 		this.bookList = bookList;
 	}
-	/**
-	 * 跳转首页
-	 * @return
-	 */
+	
 	public String execute() {
 		catalogList = catalogDAO.getAllCatalog();
 		bookList = bookDAO.getAllBooks();

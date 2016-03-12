@@ -90,6 +90,7 @@ public class orderAction {
 		commonUtil.print(orderDAO.updateOrder(order));
 	}
 	
+	
 	public User getSaler() {
 		return saler;
 	}

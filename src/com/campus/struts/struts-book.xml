@@ -30,7 +30,8 @@
     	<action name="books" class="com.campus.Actions.bookAction" method="getBooksByCID">
     		<result name="ok">/jsp/book/books.jsp</result>
     	</action>
-    	
+    	<action name="del" class="com.campus.Actions.bookAction" method="deleteBook">
+    	</action>
     	
     	<action name="search" class="com.campus.Actions.searchAction">
     		<result name="ok">/jsp/search/books.jsp</result>

@@ -47,6 +47,9 @@
     <update id="updateBook" parameterType="Book">
         update cp_books set name = #{name},price = #{price},summary = #{summary},cover = #{cover},detail = #{detail}, CID = #{CID} where BID = #{BID}
     </update>
+    <delete id="deleteBook" parameterType="int">
+        delete from cp_books where BID=#{BID}
+    </delete>
    <!--  <insert id="addUser" parameterType="Book">
         insert into user(name,pass) values(#{name},#{pass})
     </insert>

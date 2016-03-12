@@ -19,7 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/user.css">
 	<script src="<%=basePath%>common/js/city.js"></script>
   </head>
-  
+  <style>
+	  button#editbtn {
+	    position: absolute;
+	    right: 22px;
+	}
+  </style>
   <body>
 <jsp:include page="../index/header.jsp" ></jsp:include>
 <div class="infoDetail">
@@ -34,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="content">
 		<h2>你好，${user.username }</h2>
 		<form id="infoform" onsubmit="return false;">
-			<table id="userinfo1">
+			<table id="userinfo1" style="width: 400px;margin: auto;">
 				<thead>
 					<tr><th colspan="3" style="text-align:center;font-weight:bold">个人信息</th></tr>
 					<tr><th colspan="3" style="text-align:right;"><button class="btn" id="editbtn">修改个人信息</button></th></tr>
@@ -50,7 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>用户名：</td>
 					<td colspan="2">
 						<label>${user.username }</label>
-						<input type="text" id="username" name="username" value="${user.username }" hidden>
 					</td>
 				</tr>
 				<tr>
@@ -219,7 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if (data.password == undefined || data.password == ''){
 				alert("请先输入原密码");return;
 			}else if (data.newpassword != data.repassword) {
-				alert("新密码两次输入不正确。");return;
+				alert("新密码两次输入不一致。");return;
 			}
 
 			data = setDataNames(data, "updateUser");

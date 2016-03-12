@@ -40,7 +40,7 @@ public class userDAO {
 	public static User login(User loginUser) {
 		User user = findUserByName(loginUser.getUsername());
 		if (user == null) {return null;}
-		return user.getPassword().equals(loginUser.getPassword()) ? user : null;
+		return user.getPassword().equals(commonUtil.MD5(loginUser.getPassword())) ? user : null;
 	}
 	/**
 	 * 用户注册
@@ -51,6 +51,7 @@ public class userDAO {
 		if (findUserByName(registUser.getUsername()) != null) {
 			return 0;
 		}
+		registUser.setPassword(commonUtil.MD5(registUser.getPassword()));
 		return dbutils.insert(clazz, "addUser", registUser);
 	}
 	/**

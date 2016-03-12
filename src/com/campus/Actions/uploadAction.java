@@ -12,9 +12,7 @@ public class uploadAction {
 	private String myFileContentType;
 	private String myFileFileName;
 	private String destPath;
-	/**
-	 * 上传文件
-	 */
+	
 	public void execute(){
 		destPath  = ServletActionContext.getServletContext().getRealPath("/")+"/upload/";
 		try{

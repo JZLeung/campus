@@ -101,7 +101,19 @@ public class orderDAO {
 		//System.out.println(books);
 		return books;
 	}
-	
+	/**
+	 * 删除订单
+	 * @param oid
+	 * @return
+	 */
+	public static int deleteOrder(int oid) {
+		return dbutils.delete(clazz, "deleteOrder", oid);
+	}
+	/**
+	 * 更新订单状态
+	 * @param order
+	 * @return
+	 */
 	public static int updateOrder(Order order) {
 		return dbutils.update(clazz, "changeOrder", order);
 	}

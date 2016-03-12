@@ -229,6 +229,7 @@ span.red {
 }
 .infoDetail .content {
   padding: 20px;
+  position: relative;
 }
 .infoDetail .content table {
   width: 100%;

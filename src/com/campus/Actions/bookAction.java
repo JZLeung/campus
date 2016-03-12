@@ -137,7 +137,10 @@ public class bookAction {
 		return "error";
 	}
 	
-	
+	public void deleteBook() {
+		System.out.println("You have deleted the book : BID => "+bid);
+		commonUtil.print(bookDAO.delBook(bid));
+	}
 	
 	public boolean isCollected() {
 		return collected;

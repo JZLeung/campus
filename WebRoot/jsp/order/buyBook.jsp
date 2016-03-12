@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 </div>
-<form action="buy/buy" id="form">
+<form action="buy/buy" id="form" onsubmit="return validate()">
 	<input type="text" name="BID" hidden value="${bid}">
 	<table class="saler table">
 		<thead>
@@ -117,14 +117,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#address').on('change' ,function(event) {
 			event.preventDefault();
 			var data = $(this).find('option:selected').data();
-			var contact = data.contact,
-				phone = data.phone,
-				detail = data.pos+" , "+$(this).find('option:selected').text();
-			$contact.text(contact);
-			$phone.text(phone);
-			$detail.text(detail);
+			if(data != null){
+				var contact = data.contact,
+					phone = data.phone,
+					detail = data.pos+" , "+$(this).find('option:selected').text();
+				$contact.text(contact);
+				$phone.text(phone);
+				$detail.text(detail);
+			}
+			
 		}).change();
+		
 	});
+	function validate(){
+		var aid = $("#address").val();
+		if(aid == '' || aid == null){alert('请选择收货地址');return false;}
+		return true;
+	}
 </script>
 </body>
 </html>

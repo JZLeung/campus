@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var flag = this.id == 'confirm';
 			if (!confirm(flag ? '确定要确认收货吗？请谨慎。' : '确认要取消订单吗？')) {return;};
 			$('#order').find('[name="order.statue"]').val(flag ? 2 : 3);
-			$.post('<%=basePath%>order/change', $('#order').serialize(), function(data, textStatus, xhr) {
+			$.post('<%=basePath%>buy/change', $('#order').serialize(), function(data, textStatus, xhr) {
 				if (data == 1) {
 					alert(flag ? '确认收货成功' : '取消订单成功');
 					$('#statue').text(statues[flag ? 2 : 3]);

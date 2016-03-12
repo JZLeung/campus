@@ -41,8 +41,17 @@ ArrayList<Book> books = (ArrayList<Book>)request.getAttribute("books");
         			<p class="itemTitle"><%=item.getName() %></p>
         			<p class="itemPrice">￥<font color="red"><%=item.getPrice() %></font></p></a>
         		</li>
-       	<%}%>
+       	<%}
+       		if(bookSize == 0){%>
+       			
+       			<p style="text-align:center;margin-top:20px;font-size:20px;font-weight:bold">查无此书</p>
+       	<% }
+       	%>
         </ul>
     </div>
+    <script>
+    	var input = document.getElementById('search-input');
+    	input.value = "${name}";
+    </script>
 </body>
 </html>

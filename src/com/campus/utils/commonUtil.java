@@ -2,6 +2,7 @@ package com.campus.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.org.apache.xerces.internal.impl.dv.xs.HexBinaryDV;
 
 public class commonUtil {
 	/**
@@ -142,5 +144,28 @@ public class commonUtil {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		return df.format(new Date());
 		
+	}
+	
+	public static String MD5(String password) {
+		String s = password == null ? "" : password;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");  
+            md.update(password.getBytes());  
+            byte b[] = md.digest();
+            int i;
+            StringBuffer buf = new StringBuffer("");  
+            for (int offset = 0; offset < b.length; offset++) {  
+                i = b[offset];  
+                if (i < 0)  
+                    i += 256;  
+                if (i < 16)  
+                    buf.append("0");  
+                buf.append(Integer.toHexString(i));  
+            }   
+            return buf.toString();  
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
 	}
 }

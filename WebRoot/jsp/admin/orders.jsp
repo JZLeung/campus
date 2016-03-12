@@ -54,7 +54,7 @@ System.out.println(page1+"-"+page2+"-"+pageCount+"-"+allPage);
 		tbody tr:hover{background-color: #B5B5B5}
 		thead tr{padding: 20px;}
 		.orders{padding: 10px;padding-top:20px;}
-		h2{padding:0 20px;text-align:center;line-height:2em;}
+		h2{padding:0 20px;text-align:center;line-height:2em;margin: auto;width: 20em;}
 		.book:hover,.user:hover{cursor: pointer;color: #fff;}
 	</style>
 </head>
@@ -63,7 +63,7 @@ System.out.println(page1+"-"+page2+"-"+pageCount+"-"+allPage);
 	<jsp:include page="sidebar.jsp"></jsp:include>
 	<div class="right">
 		<div id="orders" class="orders">
-			<h2>所有商品信息</h2>
+			<h2>所有订单信息</h2>
 			<table id="all-orders">
 				<thead>
 					<tr>
@@ -97,7 +97,7 @@ System.out.println(page1+"-"+page2+"-"+pageCount+"-"+allPage);
 			</div>
 		</div>
 		<div id="neworder" class="orders">
-			<h2>新商品信息（一周内）</h2>
+			<h2>新订单信息（一周内）</h2>
 			<table id="new-orders">
 				<thead>
 					<tr>

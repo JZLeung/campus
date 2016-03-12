@@ -46,7 +46,7 @@ User user = (User)request.getSession().getAttribute("user");
       <a href="<%=basePath%>index/index">
         <img src="<%=basePath%>common/img/campus_logo.jpg" class="campus-logo" alt="Logo"></a>
       <section id="search-box">
-		<form action="book/search" id="s-form" method="post">
+		<form action="<%=basePath%>book/search" id="s-form" method="post">
         	<input type="text" id="search-input" name="name">
         	<button class="btn btn-search" id="submit">找书</button>
         </form>
@@ -55,10 +55,13 @@ User user = (User)request.getSession().getAttribute("user");
     </div>
     <jsp:include page="popup.jsp"></jsp:include>
     <script src="<%=basePath%>common/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="<%=basePath%>common/js/validate.js" type="text/javascript"></script>
     <script>
   function login(){
     var $lBox = $('#loginBox');
     var name = $lBox.find('#username').val(), pass = $lBox.find('#password').val();
+    if(name == ''){alert('请输入用户名');return ;}
+    if(pass == ''){alert('请输入密码');return ;}
     $.ajax({
       url: 'user/Login',
       type:'post',
@@ -86,8 +89,11 @@ User user = (User)request.getSession().getAttribute("user");
     if (name == '') {alert("用户名不能为空");return;}
     if (pass == '') {alert("密码不能为空");return;}
     if (repass == '') {alert("请再次填写密码");return;}
-    if (pass != repass) {alert("两次密码错误");return;}
+    if (pass != repass) {alert("两次密码不一致");return;}
     if (email == '') {alert("邮箱不能为空");return;}
+    var res = Validate.email(email);
+    if (res != true){alert(res);return;}
+    
     $.ajax({
       url: 'user/Regist',
       type:'post',

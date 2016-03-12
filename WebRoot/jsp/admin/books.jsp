@@ -31,7 +31,7 @@ System.out.println(page1+":"+page2+":"+allPage1+":"+allPage2); */
 		tbody tr:hover{background-color: #B5B5B5}
 		thead tr{padding: 20px;}
 		.books{padding: 10px;padding-top:20px;}
-		h2{padding:0 20px;text-align:center;line-height:2em;}
+		h2{padding:0 20px;text-align:center;line-height:2em;margin: auto;width: 20em;}
 	</style>
 </head>
 
@@ -39,7 +39,7 @@ System.out.println(page1+":"+page2+":"+allPage1+":"+allPage2); */
 	<jsp:include page="sidebar.jsp"></jsp:include>
 	<div class="right">
 		<div id="books" class="books">
-			<h2>所有商品信息</h2>
+			<h2>所有二手书信息</h2>
 			<table id="all-books">
 				<thead>
 					<tr>
@@ -72,7 +72,7 @@ System.out.println(page1+":"+page2+":"+allPage1+":"+allPage2); */
 	        </div>
 		</div>
 		<div id="newBook" class="books">
-			<h2>新商品信息（一周内）</h2>
+			<h2>新二手书信息（一周内）</h2>
 			<table id="all-books">
 				<thead>
 					<tr>

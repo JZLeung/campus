@@ -8,9 +8,7 @@ public class addressAction {
 	private Address newAdd;
 	private Address updateAdd;
 	private Address delAdd;
-	/**
-	 * 更新地址信息
-	 */
+	
 	public void updateAdd() {
 		System.out.println(updateAdd);
 		int st = addressDAO.updateAdd(updateAdd);
@@ -20,9 +18,7 @@ public class addressAction {
 			commonUtil.getPrintWriter().print("0");
 		}
 	}
-	/**
-	 * 添加新地址
-	 */
+	
 	public void addAdd() {
 		System.out.println(newAdd);
 		int st = addressDAO.addAdd(newAdd);
@@ -32,9 +28,7 @@ public class addressAction {
 			commonUtil.getPrintWriter().print("0");
 		}
 	}
-	/**
-	 * 删除地址
-	 */
+	
 	public void delAdd() {
 		System.out.println(delAdd);
 		int st = addressDAO.delAdd(delAdd);

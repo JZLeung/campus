@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="statue">
-				<h2>商品总数</h2>
+				<h2>发布的二手书总数</h2>
 				<div class="detail">
 					<p>${counts[1] }</p>
 				</div>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="statue">
-				<h2>新商品数量</h2>
+				<h2>新发布的二手书数量</h2>
 				<div class="detail">
 					<p>${news[1] }</p>
 				</div>

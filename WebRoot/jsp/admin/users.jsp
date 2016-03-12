@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		tbody tr:hover{background-color: #B5B5B5}
 		thead tr{padding: 20px;}
 		.users{padding-top:20px;}
-		h2{padding:0 20px;text-align:center;line-height:2em;}
+		h2{padding:0 20px;text-align:center;line-height:2em;margin: auto;width: 20em;}
 	</style>
 </head>
 
@@ -41,7 +41,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<th>用户名</th>
 						<th>密码</th>
 						<th>邮箱</th>
-						<th>是否激活</th>
 						<th>注册时间</th>
 						<th>上次登录时间</th>
 						<!-- <th>地址</th>
@@ -55,7 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${user.username }</td>
 							<td>*******</td>
 							<td>${user.email }</td>
-							<td class="isactive">${user.isactive }</td>
 							<td>${user.registtime }</td>
 							<td>${user.lastlogin }</td>
 							<%-- <td class="address" data-data="${user.address}"></td>
@@ -78,7 +76,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<th>用户名</th>
 						<th>密码</th>
 						<th>邮箱</th>
-						<th>是否激活</th>
 						<th>注册时间</th>
 						<th>上次登录时间</th>
 						<!-- <th>地址</th>
@@ -92,7 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${user.username }</td>
 							<td>*******</td>
 							<td>${user.email }</td>
-							<td class="isactive">${user.isactive }</td>
 							<td>${user.registtime }</td>
 							<td>${user.lastlogin }</td>
 							<%-- <td class="address" data-data="${user.address}"></td>

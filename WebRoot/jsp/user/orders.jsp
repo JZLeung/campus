@@ -39,7 +39,7 @@ System.out.println(page1+"  "+page2+"   "+pageCount+"  "+allPage);
 <html>
 <head>
 	<base href="<%=basePath%>">
-	<title>我的个人中心</title>
+	<title>我的订单</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
@@ -55,8 +55,8 @@ System.out.println(page1+"  "+page2+"   "+pageCount+"  "+allPage);
 	<jsp:include page="../index/header.jsp" ></jsp:include>
 <div class="infoDetail">
 	<div class="tabList">
-		<a href="user/index" class="active">个人信息</a>
-		<a href="javascript:void(0)">我的订单</a>
+		<a href="user/index">个人信息</a>
+		<a href="javascript:void(0)" class="active">我的订单</a>
 		<a href="user/myCollections">我的收藏</a>
 		<a href="user/myBooks">我发布的商品</a>
 		<a href="user/mySales">我已卖出的</a>

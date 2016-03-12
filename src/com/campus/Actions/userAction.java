@@ -80,12 +80,13 @@ public class userAction {
 	public void update() {
 		user = (User) commonUtil.getSession("user");
 		Map<String, String> msgMap = new HashMap<String, String>();
-		if (user.getPassword().equals(updateUser.getPassword())) {
+		System.out.println(user);
+		if (user.getPassword().equals(commonUtil.MD5(updateUser.getPassword()))) {
 			if (!updateUser.getPassword().equals(newPass)) {
 				
 				updateUser.setPassword(newPass);
 			}
-			user.setPassword(updateUser.getPassword());
+			user.setPassword(commonUtil.MD5(updateUser.getPassword()));
 			user.setPhone(updateUser.getPhone());
 			user.setEmail(updateUser.getEmail());
 			System.out.println(user);

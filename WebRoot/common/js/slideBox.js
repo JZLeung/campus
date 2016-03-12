@@ -13,7 +13,7 @@
 			timer;
 
 		$me.append($prevBtn).append($nextBtn);
-		$list.width(all*100+'%');
+
 		function animation(speed){
 			$list.animate({'margin-left': '-'+ $me.index*width+'px'}, speed || 700);
 		}

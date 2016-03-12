@@ -14,7 +14,14 @@ public class User {
 	String address;
 	String portrail;
 	String phone;
+	int usertype;
 	
+	public int getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(int usertype) {
+		this.usertype = usertype;
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -84,7 +91,7 @@ public class User {
 	}
 	
 	public String toString() {
-		return this.UID+":"+this.getUsername()+","+this.phone+","+this.email+",lastlogin:"+this.lastlogin+",registtime:"+this.registtime;
+		return this.UID+":"+this.getUsername()+","+this.phone+","+this.email+",lastlogin:"+this.lastlogin+",password:"+this.password;
 	}
 	
 }

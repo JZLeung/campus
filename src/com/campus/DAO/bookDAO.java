@@ -88,10 +88,23 @@ public class bookDAO {
 		Map<String, String> map = commonUtil.getTimeMap(start, end);
 		return (List<Book>) dbutils.getAll(clazz, "getNewBook", map);
 	}
-	
+	/**
+	 * 搜索书本
+	 * @param name
+	 * @return
+	 */
 	public static List<Book> searchBooks(String name) {
 		Book searchBook = new Book();
 		searchBook.setName(name);
 		return (List<Book>) dbutils.getAll(clazz, "searchBook",searchBook);
 	}
+	/**
+	 * 删除书本
+	 * @param bid
+	 * @return
+	 */
+	public static int delBook(int bid) {
+		return dbutils.delete(clazz, "deleteBook", bid);
+	}
+	
 }

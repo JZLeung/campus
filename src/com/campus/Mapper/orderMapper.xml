@@ -42,5 +42,5 @@
         (UID1,UID2,BID,starttime,endtime,amount,statue,AID,senderadd,expressnum,express) 
         values(#{UID1},#{UID2},#{BID},#{starttime},#{endtime},#{amount},#{statue},#{AID},#{senderadd},#{expressnum},#{express})
     </insert>
-    <delete id="deleteAddress" parameterType="int">delete from cp_orders where OID=#{OID}</delete>
+    <delete id="deleteOrder" parameterType="int">delete from cp_orders where OID=#{OID}</delete>
 </mapper>

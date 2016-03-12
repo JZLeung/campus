@@ -33,9 +33,15 @@ public class index {
 		User user = userDAO.login(adminUser);
 		Map<String, String> map = new HashMap<String, String>();
 		if (user != null) {
-			commonUtil.setSession("admin", user);
-			map.put("code", 1+"");
-			map.put("msg", "登录成功");
+			if (user.getUsertype() > 0) {
+				commonUtil.setSession("admin", user);
+				map.put("code", 1+"");
+				map.put("msg", "登录成功");
+			}else{
+				map.put("code", 0+"");
+				map.put("msg", "对不起，你不是管理员");
+			}
+			
 		}else{
 			map.put("code", 0+"");
 			map.put("msg", "登录失败，请检查用户名/密码是否正确");

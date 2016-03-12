@@ -14,7 +14,7 @@
             <!-- 配置数据库连接信息 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/campus" />
+                <property name="url" value="jdbc:mysql://localhost:3306/campus?useUnicode=true&amp;characterEncoding=UTF-8" />
                 <property name="username" value="root" />
                 <property name="password" value="" />
             </dataSource>
@@ -28,7 +28,6 @@
         <mapper resource="com/campus/Mapper/addressMapper.xml"/>
         <mapper resource="com/campus/Mapper/collectMapper.xml"/>
         <mapper resource="com/campus/Mapper/orderMapper.xml"/>
-        <mapper resource="com/campus/Mapper/hotsellMapper.xml"/>
     </mappers>
 
 </configuration>
