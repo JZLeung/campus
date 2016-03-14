@@ -19,10 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/index.css">
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/popup.css">
   </head>
   
   <body>
+  	<jsp:include page="../index/header.jsp"></jsp:include>
     <h1 style="text-align:center">请先登录再操作</h1>
+    
   </body>
 </html>

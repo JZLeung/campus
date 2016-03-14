@@ -12,8 +12,17 @@
     <!-- 
         根据id查询得到一个user对象
      -->
+    <select id="count" resultType="int">
+    	select count(*) from cp_books
+    </select>
     <select id="getBookById" parameterType="int" resultType="Book">
         select * from cp_books where BID=#{BID}
+    </select>
+    <select id="getBookByCId" parameterType="int" resultType="Book">
+        select * from cp_books where CID=#{CID}
+    </select>
+    <select id="getNewBook" parameterType="Map" resultType="Book">
+        select * from cp_books where publishtime  &gt;= #{start} and publishtime &lt;= #{end}
     </select>
     <select id="getBookByUId" parameterType="User" resultType="Book">
         select * from cp_books where UID=#{UID}
@@ -24,6 +33,10 @@
     <select id="getAllBooksByCID" parameterType="int" resultType="Book">
         select * from cp_books where CID = #{CID}
     </select>
+    <select id="searchBook" parameterType="Book" resultType="Book">
+        select * from cp_books where name like '%${name}%'
+    </select>
+    
     <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="BID">
     	<selectKey resultType="int" keyProperty="BID">  
 		  SELECT LAST_INSERT_ID()  
@@ -31,6 +44,12 @@
         insert into cp_books(UID,CID,name,publishtime,price,summary,cover,detail) 
         values(#{UID},#{CID},#{name},#{publishtime},#{price},#{summary},#{cover},#{detail})
     </insert>
+    <update id="updateBook" parameterType="Book">
+        update cp_books set name = #{name},price = #{price},summary = #{summary},cover = #{cover},detail = #{detail}, CID = #{CID} where BID = #{BID}
+    </update>
+    <delete id="deleteBook" parameterType="int">
+        delete from cp_books where BID=#{BID}
+    </delete>
    <!--  <insert id="addUser" parameterType="Book">
         insert into user(name,pass) values(#{name},#{pass})
     </insert>

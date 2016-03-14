@@ -3,10 +3,12 @@ package com.campus.DAO;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.campus.Class.Book;
 import com.campus.Class.Order;
 import com.campus.Class.User;
+import com.campus.utils.commonUtil;
 import com.campus.utils.dbutils;
 
 public class orderDAO {
@@ -44,27 +46,88 @@ public class orderDAO {
 		return (List<Order>) dbutils.getAll(clazz, "getOrderByUId", UID);
 	}
 	/**
+	 * 获取一个用户所有订单
+	 * @param UID
+	 * @return
+	 */
+	public static List<Order> getOrderByUID2(int UID) {
+		return (List<Order>) dbutils.getAll(clazz, "getOrderByUId2", UID);
+	}
+	/**
 	 * 获取订单中的发布者的信息
 	 * @param orders
 	 * @return
 	 */
 	public static List<User> getUsersByOrders(List<Order> orders) {
 		List<User> users = new ArrayList<User>();
+		User user;
 		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
 			Order order = (Order) iterator.next();
-			users.add((User)dbutils.getOne("user", "getUserById", order.getUID2()));
+			user = (User)dbutils.getOne("user", "getUserById", order.getUID2());
+			user.setPassword("");
+			users.add(user);
 		}
-		System.out.println(users);
+		//System.out.println(users);
 		return users;
 	}
-	
+	/**
+	 * 获取订单的购买者
+	 * @param orders
+	 * @return
+	 */
+	public static List<User> getBuyerByOrders(List<Order> orders) {
+		List<User> users = new ArrayList<User>();
+		User user;
+		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
+			Order order = (Order) iterator.next();
+			user = (User)dbutils.getOne("user", "getUserById", order.getUID1());
+			user.setPassword("");
+			users.add(user);
+		}
+		//System.out.println(users);
+		return users;
+	}
+	/**
+	 * 根据一组订单号查出该订单的所有书本
+	 * @param orders
+	 * @return
+	 */
 	public static List<Book> getBooksByOrders(List<Order> orders) {
 		List<Book> books = new ArrayList<Book>();
 		for (Iterator iterator = orders.iterator(); iterator.hasNext();) {
 			Order order = (Order) iterator.next();
 			books.add((Book)dbutils.getOne("book", "getBookById", order.getBID()));
 		}
-		System.out.println(books);
+		//System.out.println(books);
 		return books;
+	}
+	/**
+	 * 删除订单
+	 * @param oid
+	 * @return
+	 */
+	public static int deleteOrder(int oid) {
+		return dbutils.delete(clazz, "deleteOrder", oid);
+	}
+	/**
+	 * 更新订单状态
+	 * @param order
+	 * @return
+	 */
+	public static int updateOrder(Order order) {
+		return dbutils.update(clazz, "changeOrder", order);
+	}
+	
+	public static int countOrders() {
+		return (Integer) dbutils.getOne(clazz, "count");
+	}
+	
+	public static List<Order> getNewOrders(String start, String end) {
+		Map<String, String> map = commonUtil.getTimeMap(start, end);
+		return (List<Order>) dbutils.getAll(clazz, "getNewOrders", map);
+	}
+	
+	public static List<Order> getAllOrders() {
+		return (List<Order>) dbutils.getAll(clazz, "getAllOrders");
 	}
 }

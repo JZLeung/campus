@@ -130,6 +130,33 @@ section#search-box button.btn-search {
   right: 0;
 }
 
+.page {
+  float: right;
+}
+
+.page-list li {
+  float: left;
+  padding: 5px 10px;
+  padding-right: 20px;
+  text-decoration: underline;
+}
+.page-list li.current {
+  color: red;
+  text-decoration: none;
+}
+
+span.rt:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  margin: 0 10px;
+  border: 2px solid #555;
+  transform: rotate(45deg);
+  position: absolute;
+  border-left: 0;
+  border-bottom: 0;
+}
+
 span.red {
   color: red !important;
 }
@@ -202,6 +229,7 @@ span.red {
 }
 .infoDetail .content {
   padding: 20px;
+  position: relative;
 }
 .infoDetail .content table {
   width: 100%;
@@ -224,26 +252,45 @@ span.red {
   border-bottom: 1px solid #999;
 }
 
-.orders .order {
+.order {
   position: relative;
   border: 1px solid #e2e2e2;
+  margin: 10px 0;
+  padding: 20px;
 }
-.orders .order .statue {
+.order .statue {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 20px;
+  right: 20px;
   color: red;
 }
-.orders .order .left {
+.order .left {
   float: left;
   width: 250px;
 }
-.orders .order .left img {
+.order .left img {
   display: block;
   width: 100%;
+  border: 1px solid #555;
 }
-.orders .order .right {
+.order .right {
   float: left;
   width: 600px;
   margin-left: 20px;
+}
+.order .right .bookname {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.order .right .publisher {
+  color: #555;
+}
+.order .right .amount {
+  color: red;
+  text-align: right;
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }

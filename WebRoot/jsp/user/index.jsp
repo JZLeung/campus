@@ -19,7 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/user.css">
 	<script src="<%=basePath%>common/js/city.js"></script>
   </head>
-  
+  <style>
+	  button#editbtn {
+	    position: absolute;
+	    right: 22px;
+	}
+  </style>
   <body>
 <jsp:include page="../index/header.jsp" ></jsp:include>
 <div class="infoDetail">
@@ -28,13 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="user/myOrders">我的订单</a>
 		<a href="user/myCollections">我的收藏</a>
 		<a href="user/myBooks">我发布的商品</a>
-		<a href="javascript:void(0)">我的评价</a>
+		<a href="user/mySales">我已卖出的</a>
 	</div>
 	
 	<div class="content">
 		<h2>你好，${user.username }</h2>
-		<form id="infoform">
-			<table id="userinfo1">
+		<form id="infoform" onsubmit="return false;">
+			<table id="userinfo1" style="width: 400px;margin: auto;">
 				<thead>
 					<tr><th colspan="3" style="text-align:center;font-weight:bold">个人信息</th></tr>
 					<tr><th colspan="3" style="text-align:right;"><button class="btn" id="editbtn">修改个人信息</button></th></tr>
@@ -50,7 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>用户名：</td>
 					<td colspan="2">
 						<label>${user.username }</label>
-						<input type="text" id="username" name="username" value="${user.username }" hidden>
 					</td>
 				</tr>
 				<tr>
@@ -86,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</td>
 				</tr>
 				<tr hidden class="hidden"> 
-					<td colspan="3" style="text-align:center"><button class="btn" id="submit">确认修改</button></td>
+					<td colspan="3" style="text-align:center"><button class="btn" id="form-submit">确认修改</button></td>
 				</tr>
 			</table>
 		</form>
@@ -204,25 +208,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		setup();
 		//提交修改内容
-		$('#submit').on('click', function(event) {
+		$('#form-submit').on('click', function(event) {
 			event.preventDefault();
 			
 			var data = dataToObj($('#infoform').serializeArray());
-			//console.log(data);
+			var res = Validate.phone(data.phone);
+			if (res !== true) {
+				alert(res);return;
+			}
+			res = Validate.email(data.email);
+			if (res !== true) {
+				alert(res);return;
+			}
 			if (data.password == undefined || data.password == ''){
 				alert("请先输入原密码");return;
 			}else if (data.newpassword != data.repassword) {
-				alert("新密码两次输入不正确。");return;
+				alert("新密码两次输入不一致。");return;
 			}
 
 			data = setDataNames(data, "updateUser");
 			data['newPass'] = $('#newpassword').val();
+			console.log(data);
 			$.post('<%=basePath%>user/update',data , function(data2, textStatus, xhr) {
 				var d = JSON.parse(data2);
 				console.log(d);
 				if (d.code == '1'){alert("修改成功");location.reload();}
 				else{alert(d.msg);}
 			});
+			return false;
 		});
 		//打开、关闭编辑状态
 		$('#editbtn').on('click', function(event) {

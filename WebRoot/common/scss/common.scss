@@ -44,6 +44,24 @@ section#search-box{
 	    right: 0;
 	}
 }
+.page{float: right;}
+.page-list{
+	li{float: left;padding: 5px 10px;padding-right: 20px;text-decoration: underline;}
+	li.current{color: red;text-decoration: none;}
+}
+
+
+span.rt:before{
+	content: "";
+    height: 10px;
+    width: 10px;
+    margin: 0 10px;
+    border: 2px solid #555;
+    transform: rotate(45deg);
+    position: absolute;
+    border-left: 0;
+    border-bottom: 0;
+}
 span.red{color: red !important;}
 /**	
  * 	buttons style

@@ -49,6 +49,12 @@ public class dbutils {
 		Object object = session.selectOne(mapper, params);
 		return object;
 	}
+	
+	public static Object getOne(String clazz, String method) {
+		String mapper = "Mapper."+clazz+"Mapper."+method;
+		Object object = session.selectOne(mapper);
+		return object;
+	}
 	/**
 	 * 更新数据
 	 * @param clazz
@@ -58,7 +64,9 @@ public class dbutils {
 	 */
 	public static int update(String clazz, String method, Object params) {
 		String mapper = "Mapper."+clazz+"Mapper."+method;
-		return session.update(mapper, params);
+		int st = session.update(mapper, params);
+		session.clearCache();
+		return st;
 	}
 	/**
 	 * 删除数据

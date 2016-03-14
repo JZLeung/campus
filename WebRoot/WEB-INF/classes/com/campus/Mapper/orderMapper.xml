@@ -4,24 +4,34 @@
 例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
  -->
 <mapper namespace="Mapper.orderMapper">
+	<select id="count" resultType="int">
+    	select count(*) from cp_orders
+    </select>
+    <select id="getAllOrders" resultType="Order">
+    	select * from cp_orders
+    </select>
 	<select id="getOrderByBId" parameterType="int" resultType="Order">
         select * from cp_orders where BID=#{BID}
     </select>
     <select id="getOrderByUId" parameterType="int" resultType="Order">
         select * from cp_orders where UID1=#{UID}
     </select>
+    <select id="getOrderByUId2" parameterType="int" resultType="Order">
+        select * from cp_orders where UID2=#{UID}
+    </select>
     <select id="getOrderByOID" parameterType="int" resultType="Order">
         select * from cp_orders where OID=#{OID}
     </select>
-    <update id="updateOrder" parameterType="Order">
+    <select id="getNewOrders" parameterType="Map" resultType="Order">
+        select * from cp_orders where starttime  &gt;= #{start} and starttime &lt;= #{end}
+    </select>
+    <update id="changeOrder" parameterType="Order">
         update cp_orders set 
-        UID1 = #{UID1} , 
-        UID2 = #{UID2} , 
         endtime = #{endtime} , 
         statue = #{statue} , 
         expressnum = #{expressnum} , 
-        express = #{express} ,
-        senderadd = #{senderadd}  
+        express = #{express},
+        senderadd = #{senderadd}   
         where OID = #{OID}
     </update>
     <insert id="addOrder" parameterType="Order"  useGeneratedKeys="true" keyProperty="OID">
@@ -32,5 +42,5 @@
         (UID1,UID2,BID,starttime,endtime,amount,statue,AID,senderadd,expressnum,express) 
         values(#{UID1},#{UID2},#{BID},#{starttime},#{endtime},#{amount},#{statue},#{AID},#{senderadd},#{expressnum},#{express})
     </insert>
-    <delete id="deleteAddress" parameterType="int">delete from cp_orders where OID=#{OID}</delete>
+    <delete id="deleteOrder" parameterType="int">delete from cp_orders where OID=#{OID}</delete>
 </mapper>

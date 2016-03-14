@@ -4,14 +4,9 @@
 例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
  -->
 <mapper namespace="Mapper.userMapper">
-    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
-    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
-    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
-    User类就是users表所对应的实体类
-    -->
-    <!-- 
-        根据id查询得到一个user对象
-     -->
+	<select id="count" resultType="int">
+    	select count(*) from cp_user
+    </select>
     <select id="getUserByName" parameterType="String" resultType="User">
         select * from cp_user where username=#{username}
     </select>
@@ -21,11 +16,17 @@
     <select id="getAllUser" resultType="User">
         select * from cp_user
     </select>
+    <select id="getNewUser" parameterType="Map" resultType="User">
+        select * from cp_user where registtime  &gt;= #{start} and registtime &lt;= #{end}
+    </select>
     <insert id="addUser" parameterType="User">
-        insert cp_user(username, password, email, registtime) values(#{username} , #{password} , #{email} , #{registtime})
+        insert cp_user(username, password, email, registtime, lastlogin) values(#{username} , #{password} , #{email} , #{registtime}, #{lastlogin})
     </insert>
     <update id="updateUser" parameterType="User">
-        update cp_user set username = #{username} , password = #{password} , email = #{email} , phone = #{phone} where uid = #{UID}
+        update cp_user set password = #{password} , email = #{email} , phone = #{phone} , lastlogin = #{lastlogin} where UID = #{UID}
+    </update>
+    <update id="resetLogin" parameterType="User">
+        update cp_user set lastlogin = #{lastlogin}, registtime = #{registtime} where UID = #{UID}
     </update>
     <delete id="deleteUser" parameterType="int">
         delete from cp_user where UID=#{UID}

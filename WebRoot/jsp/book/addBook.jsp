@@ -7,8 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<base href="<%=basePath%>
-	">
+	<base href="<%=basePath%>">
 	<title>我要卖书</title>
 
 	<meta http-equiv="pragma" content="no-cache">
@@ -54,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="img">
 		<img src="<%=basePath%>common/img/bookCover/default.png" alt="">
 	</div>
-	<form action="book/addBook" method="post" enctype="multipart/form-data">
+	<form action="book/addBook" method="post" enctype="multipart/form-data" onsubmit=" return validate()" id="addform">
 	<table class="table">
 		<thead>
 			<th><p>请填写书本的详细信息。带<span class="red">*</span>为必填项</p></th>
@@ -77,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<td><input type="text" name="book.price" ></td>
 		</tr>
 		<tr>
-			<td>&nbsp;&nbsp;简介</td>
+			<td><span class="red">*</span>&nbsp;简介</td>
 			<td><input type="text" name="book.summary" ></td>
 		</tr>
 		<tr>
@@ -164,6 +163,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	parent.options[0].selected = true;
 	$(parent).change();
 	child.options[0].selected = true;
+
+	var must = {
+		'book.name' : '书名不能为空',
+		'book.CID' : '请选择书的类别',
+		'book.price' : '请输入书的价格',
+		'book.summary' : '请输入书的简介'
+	},
+	reg=/^[0-9]+.?[0-9]*$/;
+	function validate(){
+		var formdata = $("#addform").serializeArray();
+		for (var i = 0; i < formdata.length; i++) {
+			if (must[formdata[i]['name']] !== undefined){
+				if (formdata[i]['value'] == '') {
+					alert(must[formdata[i]['name']]);
+					return false;
+				}
+			}
+			if (formdata[i]['name'] == 'book.price') {
+				if (!reg.test(formdata[i]['value'])) {
+					alert('请输入正确的价格');return false;
+				}
+			}
+		}
+		return true;
+	}
 	</script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.campus.Actions;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +41,10 @@ public class userAction {
 		//System.out.println(user);
 		User loginedUser = userDAO.login(user);
 		if (loginedUser != null) {
+			System.out.println("before:"+loginedUser.getRegisttime());
+			loginedUser.setLastlogin(new Timestamp(new Date().getTime()));
+			System.out.println("after:"+loginedUser.getRegisttime());
+			userDAO.resetLogin(loginedUser);
 			commonUtil.setSession("user", loginedUser);
 			commonUtil.getPrintWriter().println("1");
 		}else{
@@ -49,6 +55,9 @@ public class userAction {
 	 * 注册
 	 */
 	public void regist() {
+		
+		addUser.setRegisttime(new Timestamp(new Date().getTime()));
+		addUser.setLastlogin(new Timestamp(new Date().getTime()));
 		System.out.println(addUser);
 		int status = userDAO.regist(addUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
@@ -70,16 +79,18 @@ public class userAction {
 	 */
 	public void update() {
 		user = (User) commonUtil.getSession("user");
-		System.out.println(updateUser);
 		Map<String, String> msgMap = new HashMap<String, String>();
-		if (user.getPassword().equals(updateUser.getPassword())) {
-			System.out.println(newPass);
+		System.out.println(user);
+		if (user.getPassword().equals(commonUtil.MD5(updateUser.getPassword()))) {
 			if (!updateUser.getPassword().equals(newPass)) {
 				
 				updateUser.setPassword(newPass);
 			}
-			updateUser.setUID(user.getUID());
-			int status = userDAO.update(updateUser);
+			user.setPassword(commonUtil.MD5(updateUser.getPassword()));
+			user.setPhone(updateUser.getPhone());
+			user.setEmail(updateUser.getEmail());
+			System.out.println(user);
+			int status = userDAO.update(user);
 			if (status > 0) {
 				msgMap.put("msg", "修改成功");
 				msgMap.put("code", "1");
@@ -94,7 +105,7 @@ public class userAction {
 			msgMap.put("code", "0");
 		}
 		JSONObject jsonObject = new JSONObject(msgMap);
-		System.out.println(jsonObject.toString());
+		//System.out.println(jsonObject.toString());
 		commonUtil.getPrintWriter().println(jsonObject.toString());
 	}
 	
@@ -103,14 +114,23 @@ public class userAction {
 		if (user == null) {
 			return "login";
 		}
-		//addresses = addressDAO.getAddressByUser(user);
 		orders = orderDAO.getOrderByUID(user.getUID());
 		json_pulishers = new JSONArray(orderDAO.getUsersByOrders(orders)).toString();
 		json_books = new JSONArray(orderDAO.getBooksByOrders(orders)).toString();
-		//json_addresses = new JSONArray(addresses).toString();
-		//System.out.println(json_addresses);
-		System.out.println("json_pulishers:"+json_pulishers);
-		System.out.println("json_books:"+json_books);
+		return "ok";
+	}
+	/**
+	 * 查询一个用户卖出的订单
+	 * @return
+	 */
+	public String mySales() {
+		user = (User) commonUtil.getSession("user");
+		if (user == null) {
+			return "login";
+		}
+		orders = orderDAO.getOrderByUID2(user.getUID());
+		json_pulishers = new JSONArray(orderDAO.getUsersByOrders(orders)).toString();
+		json_books = new JSONArray(orderDAO.getBooksByOrders(orders)).toString();
 		return "ok";
 	}
 	
@@ -140,7 +160,7 @@ public class userAction {
 	 */
 	public String getMyCollections() {
 		books = collectDAO.getAllCollections();
-		System.out.println(books);
+		//System.out.println(books);
 		return "ok";
 	}
 	/**

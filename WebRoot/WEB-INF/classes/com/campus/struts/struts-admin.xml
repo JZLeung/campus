@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="admin" extends="struts-default" namespace="/admin">
+    	<action name="getPublishers" class="com.campus.Admin.orders" method="getPublishers">
+    	</action>
+    	<action name="getCustomers" class="com.campus.Admin.orders" method="getCustomers">
+    	</action>
+    	<action name="getBooks" class="com.campus.Admin.orders" method="getBooks">
+    	</action>
+    	
+    
+    
+    	<action name="login" class="com.campus.Admin.index" method="toLogin">
+    		<result name="ok">/jsp/admin/login.jsp</result>
+    	</action>
+    	
+    	<action name="login2" class="com.campus.Admin.index" method="login">
+    	</action>
+    	
+    	<action name="index" class="com.campus.Admin.index">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/index.jsp</result>
+    	</action>
+    	
+    	<action name="users" class="com.campus.Admin.users">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/users.jsp</result>
+    	</action>
+    	
+    	<action name="books" class="com.campus.Admin.books">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/books.jsp</result>
+    	</action>
+    	
+    	<action name="orders" class="com.campus.Admin.orders">
+    		<result name="login">/jsp/admin/login.jsp</result>
+    		<result name="ok">/jsp/admin/orders.jsp</result>
+    	</action>
+    </package>
+</struts>

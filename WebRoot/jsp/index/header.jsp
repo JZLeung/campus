@@ -4,8 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 User user = (User)request.getSession().getAttribute("user");
 %>
-<link rel="stylesheet" type="text/css" href="<%=basePath%>
-common/css/popup.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>common/css/popup.css">
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <div class="container">
   <header id="main-header">
@@ -26,18 +25,19 @@ common/css/popup.css">
         <a href="user/index" class="user-info">
           <%=user.getUsername() %></a>
       </li>
+      
       <li>
         <a href="javascrip:void(0)" class="user-logout">退出</a>
+      </li>
+      <li>
+        <a href="user/myOrders" class="user-order">我是买家</a>
       </li>
       <%} %>
       <!-- </ul>
       <ul class="right-part">
         -->
         <li>
-          <a href=""></a>
-        </li>
-        <li>
-          <a href="" class="user-add">我要卖书</a>
+          <a href="book/add" class="user-add">我要卖书</a>
         </li>
       </ul>
       <div class="clearfix"></div>
@@ -46,18 +46,22 @@ common/css/popup.css">
       <a href="<%=basePath%>index/index">
         <img src="<%=basePath%>common/img/campus_logo.jpg" class="campus-logo" alt="Logo"></a>
       <section id="search-box">
-
-        <input type="text" id="search-input">
-        <button class="btn btn-search">找书</button>
+		<form action="<%=basePath%>book/search" id="s-form" method="post">
+        	<input type="text" id="search-input" name="name">
+        	<button class="btn btn-search" id="submit">找书</button>
+        </form>
       </section>
       <div class="clearfix"></div>
     </div>
     <jsp:include page="popup.jsp"></jsp:include>
     <script src="<%=basePath%>common/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="<%=basePath%>common/js/validate.js" type="text/javascript"></script>
     <script>
   function login(){
     var $lBox = $('#loginBox');
     var name = $lBox.find('#username').val(), pass = $lBox.find('#password').val();
+    if(name == ''){alert('请输入用户名');return ;}
+    if(pass == ''){alert('请输入密码');return ;}
     $.ajax({
       url: 'user/Login',
       type:'post',
@@ -85,8 +89,11 @@ common/css/popup.css">
     if (name == '') {alert("用户名不能为空");return;}
     if (pass == '') {alert("密码不能为空");return;}
     if (repass == '') {alert("请再次填写密码");return;}
-    if (pass != repass) {alert("两次密码错误");return;}
+    if (pass != repass) {alert("两次密码不一致");return;}
     if (email == '') {alert("邮箱不能为空");return;}
+    var res = Validate.email(email);
+    if (res != true){alert(res);return;}
+    
     $.ajax({
       url: 'user/Regist',
       type:'post',
@@ -142,15 +149,20 @@ common/css/popup.css">
             });
           };
           break;
-        case 'info':
+        <%-- case 'info':
           location.href="<%=basePath%>user/index";
           break;
         case 'add':
           location.href="<%=basePath%>book/add";
-          break;
+          break; --%>
         default:
+        	location.href='<%=basePath%>'+$(this).attr('href');
           break;
       }
+    });
+    
+    $("#submit").click(function(e){
+    	$('#s-form').submit();
     });
   });
 </script>
