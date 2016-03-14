@@ -1,7 +1,0 @@
-1、导入数据库 'campus.sql'
-2、MyEclipse导入工程campus
-3、发布
-4、浏览器进入链接：
-	http://localhost:8080/campus/index/index 为前台地址
-	http://localhost:8080/campus/admin/index 为后台地址（账号密码均为admin）
-5、全方位试试有无bug
